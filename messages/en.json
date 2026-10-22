@@ -1,0 +1,126 @@
+{
+  "Metadata": {
+    "title": "HWENDOXI — African spiritual knowledge and pharmacopoeia",
+    "description": "A pan-African platform for the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia."
+  },
+  "Header": {
+    "home": "HWENDOXI, home",
+    "menu": "Menu",
+    "navLabel": "Main navigation",
+    "language": "Language",
+    "directory": "Directory",
+    "resources": "Resources",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "List a practitioner"
+  },
+  "Home": {
+    "devBanner": "Development version — all data shown is fictitious",
+    "heroTitle": "Preserve our knowledge. Protect our traditions. Pass on our heritage.",
+    "heroText": "HWENDOXI is a pan-African platform dedicated to the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia. Explore our directory, discover the traditions and access documentary resources.",
+    "exploreDirectory": "Explore the directory",
+    "discover": "Discover HWENDOXI",
+    "categoriesTitle": "Browse by category",
+    "categories": {
+      "deities": {
+        "title": "African deities",
+        "text": "Documented entries by tradition."
+      },
+      "fa": {
+        "title": "Fa practitioners",
+        "text": "Practitioners of the Fa tradition."
+      },
+      "ifa": {
+        "title": "Babalawo and Ifá",
+        "text": "Ifá practitioners."
+      },
+      "priests": {
+        "title": "Priests and priestesses",
+        "text": "Leaders of traditional cults."
+      },
+      "others": {
+        "title": "Other practitioners",
+        "text": "Other figures of African spirituality."
+      }
+    },
+    "resources": {
+      "documentation": {
+        "title": "Documentation",
+        "text": "Documentary resources: section coming soon."
+      },
+      "news": {
+        "title": "News",
+        "text": "News and video programmes: section coming soon."
+      },
+      "events": {
+        "title": "Events",
+        "text": "Calendar of events: section coming soon."
+      }
+    },
+    "referencerTitle": "List a practitioner",
+    "referencerText": "The five-step listing form will be available in the next stage of the project. No profile will be published automatically.",
+    "pillarsTitle": "Our four pillars",
+    "pillars": {
+      "protection": {
+        "title": "Protection",
+        "text": "Protecting communities against abuse and impersonation."
+      },
+      "preservation": {
+        "title": "Preservation",
+        "text": "Documenting and promoting ancestral knowledge."
+      },
+      "transmission": {
+        "title": "Transmission",
+        "text": "Passing on knowledge with respect for traditions."
+      },
+      "verification": {
+        "title": "Verification",
+        "text": "A transparent directory whose files are reviewed."
+      }
+    }
+  },
+  "Directory": {
+    "title": "Practitioner directory",
+    "searchLabel": "Search the directory",
+    "placeholder": "Name, spiritual name, specialty, phone number…",
+    "count": "{count, plural, =0 {No profile found.} one {# profile found.} other {# profiles found.}}",
+    "noFraud": "A number that is not listed does not mean fraud.",
+    "noResults": "No results found in our directory. Please check the information entered or try another search.",
+    "disclaimer": "The verification status only certifies that a file has been reviewed under HWENDOXI’s procedures. It does not certify powers, results or the effectiveness of any practice.",
+    "discover": "Discover",
+    "reduce": "Collapse",
+    "years": "Declared years of practice: {years}",
+    "phonePublic": "Phone (publication authorised): {phone}",
+    "phoneHidden": "Phone: not published (practitioner’s choice)",
+    "fullProfileSoon": "The full profile page will be available in the next stage of the project.",
+    "levels": {
+      "1": "Identity reviewed",
+      "2": "Membership documented",
+      "3": "In-depth file"
+    },
+    "country": "Country",
+    "allCountries": "All countries",
+    "category": "Category",
+    "allCategories": "All categories",
+    "level": "Verification level",
+    "allLevels": "All levels",
+    "reset": "Reset",
+    "loading": "Loading…",
+    "error": "Search is temporarily unavailable. Please try again.",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {pages}"
+  },
+  "Footer": {
+    "tagline": "A pan-African platform for the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia.",
+    "navTitle": "Navigation",
+    "directory": "Directory",
+    "resources": "Resources",
+    "referencer": "List a practitioner",
+    "infoTitle": "Information",
+    "contactTodo": "Contact: to be completed",
+    "legalSoon": "Legal notice: coming soon",
+    "privacySoon": "Privacy policy: coming soon",
+    "publisher": "Publisher: PRYXA — © HWENDOXI"
+  }
+}

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Palette HWENDOXI, tirée du logo (or mesuré : #B8860B) */
+@theme {
+  --color-gold: #b8860b;
+  --color-gold-dark: #8a6408; /* pour le texte sur fond clair (contraste suffisant) */
+  --color-ivory: #fbf8f1;
+  --color-ink: #2a1e10;
+  --color-muted: #6b5b47;
+  --color-sand: #f3ecdc;
+  --color-line: #e8dfcc;
+  --color-forest: #1f5c45;
+}
+
+/* Polices chargées dans layout.tsx */
+@theme inline {
+  --font-sans: var(--font-noto-sans), system-ui, sans-serif;
+  --font-serif: var(--font-noto-serif), Georgia, serif;
+}

@@ -1,0 +1,126 @@
+{
+  "Metadata": {
+    "title": "HWENDOXI — Savoirs spirituels et pharmacopée africaine",
+    "description": "Plateforme panafricaine de préservation, de protection et de transmission des savoirs spirituels et de la pharmacopée africaine."
+  },
+  "Header": {
+    "home": "HWENDOXI, accueil",
+    "menu": "Menu",
+    "navLabel": "Navigation principale",
+    "language": "Langue",
+    "directory": "Annuaire",
+    "resources": "Ressources",
+    "about": "À propos",
+    "contact": "Contact",
+    "cta": "Référencer un praticien"
+  },
+  "Home": {
+    "devBanner": "Version de développement — toutes les données affichées sont fictives",
+    "heroTitle": "Préserver nos savoirs. Protéger nos traditions. Transmettre notre héritage.",
+    "heroText": "HWENDOXI est une plateforme panafricaine dédiée à la préservation, à la protection et à la transmission des savoirs spirituels et de la pharmacopée africaine. Découvrez notre annuaire, explorez les traditions et accédez à des ressources documentaires.",
+    "exploreDirectory": "Explorer l’annuaire",
+    "discover": "Découvrir HWENDOXI",
+    "categoriesTitle": "Explorer par catégorie",
+    "categories": {
+      "deities": {
+        "title": "Divinités africaines",
+        "text": "Fiches documentées par tradition."
+      },
+      "fa": {
+        "title": "Praticiens du Fa",
+        "text": "Acteurs de la tradition du Fa."
+      },
+      "ifa": {
+        "title": "Babalawo et Ifá",
+        "text": "Praticiens d’Ifá."
+      },
+      "priests": {
+        "title": "Prêtres et prêtresses",
+        "text": "Responsables des cultes traditionnels."
+      },
+      "others": {
+        "title": "Autres acteurs",
+        "text": "Autres acteurs de la spiritualité."
+      }
+    },
+    "resources": {
+      "documentation": {
+        "title": "Documentation",
+        "text": "Ressources documentaires : rubrique à venir."
+      },
+      "news": {
+        "title": "Actualités",
+        "text": "Actualités et émissions vidéo : rubrique à venir."
+      },
+      "events": {
+        "title": "Événements",
+        "text": "Agenda des manifestations : rubrique à venir."
+      }
+    },
+    "referencerTitle": "Référencer un praticien",
+    "referencerText": "Le formulaire de référencement en cinq étapes sera disponible à l’étape suivante du projet. Aucun profil ne sera publié automatiquement.",
+    "pillarsTitle": "Nos quatre piliers",
+    "pillars": {
+      "protection": {
+        "title": "Protection",
+        "text": "Protéger les communautés contre les abus et les usurpations."
+      },
+      "preservation": {
+        "title": "Préservation",
+        "text": "Documenter et valoriser les savoirs ancestraux."
+      },
+      "transmission": {
+        "title": "Transmission",
+        "text": "Transmettre les connaissances dans le respect des traditions."
+      },
+      "verification": {
+        "title": "Vérification",
+        "text": "Un annuaire transparent dont les dossiers sont examinés."
+      }
+    }
+  },
+  "Directory": {
+    "title": "Annuaire des praticiens",
+    "searchLabel": "Rechercher dans l’annuaire",
+    "placeholder": "Nom, nom spirituel, spécialité, numéro de téléphone…",
+    "count": "{count, plural, =0 {Aucun profil trouvé.} one {# profil trouvé.} other {# profils trouvés.}}",
+    "noFraud": "Un numéro non référencé ne signifie pas une fraude.",
+    "noResults": "Aucun résultat trouvé dans notre annuaire. Veuillez vérifier les informations saisies ou essayer une autre recherche.",
+    "disclaimer": "Le statut de vérification atteste qu’un dossier a été examiné selon les procédures de HWENDOXI. Il ne certifie ni des pouvoirs, ni des résultats, ni l’efficacité d’une pratique.",
+    "discover": "Découvrir",
+    "reduce": "Réduire",
+    "years": "Années d’exercice déclarées : {years}",
+    "phonePublic": "Téléphone (publication autorisée) : {phone}",
+    "phoneHidden": "Téléphone : non publié (choix du praticien)",
+    "fullProfileSoon": "La fiche complète sera disponible à l’étape suivante du projet.",
+    "levels": {
+      "1": "Identité examinée",
+      "2": "Appartenance documentée",
+      "3": "Dossier approfondi"
+    },
+    "country": "Pays",
+    "allCountries": "Tous les pays",
+    "category": "Catégorie",
+    "allCategories": "Toutes les catégories",
+    "level": "Niveau de vérification",
+    "allLevels": "Tous les niveaux",
+    "reset": "Réinitialiser",
+    "loading": "Chargement…",
+    "error": "La recherche est momentanément indisponible. Veuillez réessayer.",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageOf": "Page {page} sur {pages}"
+  },
+  "Footer": {
+    "tagline": "Plateforme panafricaine de préservation, de protection et de transmission des savoirs spirituels et de la pharmacopée africaine.",
+    "navTitle": "Navigation",
+    "directory": "Annuaire",
+    "resources": "Ressources",
+    "referencer": "Référencer un praticien",
+    "infoTitle": "Informations",
+    "contactTodo": "Contact : à compléter",
+    "legalSoon": "Mentions légales : à venir",
+    "privacySoon": "Politique de confidentialité : à venir",
+    "publisher": "Éditeur : PRYXA — © HWENDOXI"
+  }
+}
