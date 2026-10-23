@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import DirectoryPreview from "@/components/DirectoryPreview";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { Link } from "@/i18n/navigation";
 import { createPublicClient } from "@/lib/supabase/public";
 import { btnGhost, btnPrimary, container } from "@/lib/ui";
 
@@ -21,6 +22,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Home");
+  const tr = await getTranslations("Referencer");
 
   // Catégories lues dans la base de données Supabase
   const supabase = createPublicClient();
@@ -87,13 +89,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
               ))}
             </div>
-            {process.env.NODE_ENV !== "production" && (
-              <p className="mt-3 text-xs text-muted">
-                {error
-                  ? `[dev] Supabase : erreur (${error.message}) — valeurs de secours affichées`
-                  : `[dev] Catégories lues depuis Supabase : ${dbCategories.length}`}
-              </p>
-            )}
           </div>
         </section>
 
@@ -112,8 +107,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
         <section id="referencer" className="bg-sand py-10">
           <div className={container}>
-            <h2 className="font-serif text-2xl font-bold">{t("referencerTitle")}</h2>
-            <p className="mt-2 max-w-2xl text-muted">{t("referencerText")}</p>
+            <h2 className="font-serif text-2xl font-bold">{tr("title")}</h2>
+            <p className="mt-2 max-w-2xl text-muted">{tr("text")}</p>
+            <Link href="/referencer-un-praticien" className={`${btnPrimary} mt-4`}>{tr("button")}</Link>
           </div>
         </section>
 

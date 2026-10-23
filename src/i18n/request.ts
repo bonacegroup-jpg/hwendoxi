@@ -6,8 +6,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-  return {
-    locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
-  };
+  // Les textes sont répartis en plusieurs fichiers (général + formulaire) puis fusionnés.
+  const base = (await import(`../../messages/${locale}.json`)).default;
+  const form = (await import(`../../messages/form.${locale}.json`)).default;
+
+  return { locale, messages: { ...base, ...form } };
 });

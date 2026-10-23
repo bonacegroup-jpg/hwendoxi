@@ -18,7 +18,7 @@ export default function SiteFooter() {
           <ul className="mt-2 space-y-1">
             <li><Link href={{ pathname: "/", hash: "annuaire" }}>{t("directory")}</Link></li>
             <li><Link href={{ pathname: "/", hash: "ressources" }}>{t("resources")}</Link></li>
-            <li><Link href={{ pathname: "/", hash: "referencer" }}>{t("referencer")}</Link></li>
+            <li><Link href="/referencer-un-praticien">{t("referencer")}</Link></li>
             <li><Link href="/a-propos">{t("about")}</Link></li>
           </ul>
         </div>

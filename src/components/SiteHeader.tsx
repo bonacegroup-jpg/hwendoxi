@@ -40,7 +40,7 @@ export default function SiteHeader() {
           <Link href="/a-propos" className={linkClass} onClick={close}>{t("about")}</Link>
           <a href="#contact" className={linkClass} onClick={close}>{t("contact")}</a>
           <LanguageSwitcher />
-          <Link href={{ pathname: "/", hash: "referencer" }} className={btnPrimary} onClick={close}>{t("cta")}</Link>
+          <Link href="/referencer-un-praticien" className={btnPrimary} onClick={close}>{t("cta")}</Link>
         </nav>
       </div>
     </header>
