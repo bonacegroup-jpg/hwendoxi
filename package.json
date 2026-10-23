@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "latest",
     "@supabase/supabase-js": "^2.117.2",
     "next": "16.3.8",
     "next-intl": "^4.14.8",
