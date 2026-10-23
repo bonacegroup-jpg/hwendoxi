@@ -3,6 +3,9 @@
     "title": "HWENDOXI — Savoirs spirituels et pharmacopée africaine",
     "description": "Plateforme panafricaine de préservation, de protection et de transmission des savoirs spirituels et de la pharmacopée africaine."
   },
+  "Common": {
+    "provisional": "Version provisoire : ce texte est un modèle de travail, à compléter et à faire relire par un juriste avant la mise en production."
+  },
   "Header": {
     "home": "HWENDOXI, accueil",
     "menu": "Menu",
@@ -15,7 +18,7 @@
     "cta": "Référencer un praticien"
   },
   "Home": {
-    "devBanner": "Version de développement — toutes les données affichées sont fictives",
+    "devBanner": "Version de test — toutes les données affichées sont fictives",
     "heroTitle": "Préserver nos savoirs. Protéger nos traditions. Transmettre notre héritage.",
     "heroText": "HWENDOXI est une plateforme panafricaine dédiée à la préservation, à la protection et à la transmission des savoirs spirituels et de la pharmacopée africaine. Découvrez notre annuaire, explorez les traditions et accédez à des ressources documentaires.",
     "exploreDirectory": "Explorer l’annuaire",
@@ -92,7 +95,7 @@
     "years": "Années d’exercice déclarées : {years}",
     "phonePublic": "Téléphone (publication autorisée) : {phone}",
     "phoneHidden": "Téléphone : non publié (choix du praticien)",
-    "fullProfileSoon": "La fiche complète sera disponible à l’étape suivante du projet.",
+    "viewProfile": "Voir la fiche complète",
     "levels": {
       "1": "Identité examinée",
       "2": "Appartenance documentée",
@@ -111,16 +114,129 @@
     "next": "Suivant",
     "pageOf": "Page {page} sur {pages}"
   },
+  "Profile": {
+    "back": "← Retour à l’accueil",
+    "about": "Présentation",
+    "bioEmpty": "Aucune présentation renseignée.",
+    "category": "Catégorie",
+    "specialties": "Spécialités",
+    "years": "Années d’exercice déclarées",
+    "contact": "Coordonnées publiques",
+    "noContact": "Ce praticien n’a pas autorisé la publication de coordonnées.",
+    "copy": "Copier le lien de la fiche",
+    "copied": "Lien copié",
+    "verificationNote": "Ce niveau atteste l’examen d’un dossier selon les procédures de HWENDOXI. Il ne certifie ni des pouvoirs, ni des résultats, ni l’efficacité d’une pratique.",
+    "kinds": {
+      "phone": "Téléphone",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "website": "Site web"
+    },
+    "reportTitle": "Signaler ce profil",
+    "reportHelp": "Une erreur, une usurpation présumée ou une publication sans autorisation ? Votre signalement sera examiné par l’équipe. Il n’est pas publié et ne constitue pas une accusation.",
+    "reportMessage": "Décrivez le problème (10 caractères minimum)",
+    "reportEmail": "Votre e-mail (facultatif, pour un éventuel retour)",
+    "reportSend": "Envoyer le signalement",
+    "reportSending": "Envoi…",
+    "reportThanks": "Votre signalement a été transmis à l’équipe pour examen. Merci.",
+    "reportError": "L’envoi a échoué. Veuillez réessayer plus tard."
+  },
+  "About": {
+    "title": "À propos de HWENDOXI",
+    "intro": "HWENDOXI est une plateforme numérique panafricaine dédiée à la préservation, à la protection, à la documentation et à la transmission des savoirs spirituels et de la pharmacopée africaine.",
+    "sections": [
+      {
+        "title": "Notre mission",
+        "body": "Documenter et valoriser les savoirs ancestraux africains, faciliter la recherche d’informations et de profils, et contribuer à protéger les communautés contre les abus, les dérives et les usurpations d’identité."
+      },
+      {
+        "title": "Nos quatre piliers",
+        "body": "Protection : protéger les communautés contre les abus et les usurpations.\nPréservation : documenter et valoriser les savoirs ancestraux.\nTransmission : transmettre les connaissances dans le respect des traditions et des communautés.\nVérification : proposer un annuaire transparent dont les dossiers sont examinés."
+      },
+      {
+        "title": "Ce que signifie « vérifié »",
+        "body": "Le statut de vérification atteste uniquement que certaines informations ont été examinées selon les procédures de HWENDOXI. Il ne certifie ni des pouvoirs spirituels, ni des résultats de consultations, ni l’efficacité d’une pratique médicinale. L’absence d’un profil ou d’un numéro dans l’annuaire n’est jamais une preuve de fraude."
+      },
+      {
+        "title": "Qui édite ce site ?",
+        "body": "HWENDOXI est édité par PRYXA."
+      }
+    ]
+  },
+  "LegalNotice": {
+    "title": "Mentions légales",
+    "intro": "Informations légales relatives au site HWENDOXI.",
+    "sections": [
+      {
+        "title": "Éditeur du site",
+        "body": "PRYXA\nAdresse : [à compléter]\nPays : [à compléter]\nContact : [à compléter]"
+      },
+      {
+        "title": "Directeur de la publication",
+        "body": "[à compléter]"
+      },
+      {
+        "title": "Hébergement",
+        "body": "Site : Vercel Inc. (coordonnées officielles à compléter).\nBase de données : Supabase (coordonnées officielles à compléter)."
+      },
+      {
+        "title": "Propriété intellectuelle",
+        "body": "Le logo, les textes et les contenus de HWENDOXI sont protégés. Toute reproduction est soumise à autorisation préalable."
+      },
+      {
+        "title": "Avertissements",
+        "body": "Le statut de vérification atteste l’examen d’un dossier, non des pouvoirs ou des résultats d’un praticien. Les informations relatives à la pharmacopée sont données à titre documentaire et ne remplacent pas l’avis d’un professionnel de santé."
+      }
+    ]
+  },
+  "Privacy": {
+    "title": "Politique de confidentialité",
+    "intro": "Cette page explique quelles données sont collectées sur HWENDOXI, pourquoi, et comment exercer vos droits.",
+    "sections": [
+      {
+        "title": "Données collectées",
+        "body": "Pour un référencement : identité, pays et ville, informations professionnelles et spirituelles, coordonnées, photographie, pièce d’identité. Pour un signalement : votre message et, si vous le souhaitez, votre e-mail."
+      },
+      {
+        "title": "Finalités",
+        "body": "Examiner les demandes de référencement, publier dans l’annuaire les seules informations autorisées, protéger les communautés contre les usurpations et traiter les signalements."
+      },
+      {
+        "title": "Consentement et publication",
+        "body": "Aucune information n’est publiée sans le consentement explicite de la personne concernée. Vous choisissez, information par information, ce qui peut être rendu public. Votre e-mail n’est jamais publié."
+      },
+      {
+        "title": "Pièces d’identité",
+        "body": "Elles servent uniquement à la vérification, ne sont jamais publiées, ne sont consultables que par les vérificateurs habilités, et sont supprimées après la décision du comité."
+      },
+      {
+        "title": "Vos droits",
+        "body": "Vous pouvez demander l’accès, la correction, le retrait ou la suppression de vos données à tout moment. Contact : [à compléter]."
+      },
+      {
+        "title": "Sous-traitants",
+        "body": "Hébergement du site (Vercel) et de la base de données (Supabase). Liste et localisation précises : [à compléter]."
+      },
+      {
+        "title": "Autorité de contrôle",
+        "body": "[à préciser selon le pays : Bénin et autres pays concernés]"
+      }
+    ]
+  },
   "Footer": {
     "tagline": "Plateforme panafricaine de préservation, de protection et de transmission des savoirs spirituels et de la pharmacopée africaine.",
     "navTitle": "Navigation",
     "directory": "Annuaire",
     "resources": "Ressources",
     "referencer": "Référencer un praticien",
+    "about": "À propos",
     "infoTitle": "Informations",
     "contactTodo": "Contact : à compléter",
-    "legalSoon": "Mentions légales : à venir",
-    "privacySoon": "Politique de confidentialité : à venir",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
     "publisher": "Éditeur : PRYXA — © HWENDOXI"
   }
 }

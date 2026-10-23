@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Noto_Sans, Noto_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { indexingEnabled, siteUrl } from "@/lib/site";
 import "../globals.css";
 
 // "latin-ext" couvre les caractères du yoruba et du fon (ẹ, ọ, ɖ, ɛ, ɔ…)
@@ -20,10 +21,11 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
   return {
+    metadataBase: new URL(siteUrl),
     title: { default: t("title"), template: "%s | HWENDOXI" },
     description: t("description"),
-    // À RETIRER AU LANCEMENT : empêche l’indexation pendant le développement.
-    robots: { index: false, follow: false },
+    // Non indexable tant que la variable SITE_INDEXING n'est pas réglée sur "on" dans Vercel.
+    robots: indexingEnabled ? { index: true, follow: true } : { index: false, follow: false },
   };
 }
 

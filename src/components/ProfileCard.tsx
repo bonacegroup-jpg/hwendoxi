@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useId, useState } from "react";
+import { Link } from "@/i18n/navigation";
 import type { PractitionerCard } from "@/lib/types";
 import { btnGhost } from "@/lib/ui";
 
@@ -33,7 +34,9 @@ export default function ProfileCard({ p }: { p: PractitionerCard }) {
       <div id={panelId} hidden={!open} className="mb-3 border-t border-dashed border-line pt-3 text-sm">
         {p.years !== null && <p>{t("years", { years: p.years })}</p>}
         <p>{p.phone ? t("phonePublic", { phone: p.phone }) : t("phoneHidden")}</p>
-        <p className="mt-1 text-muted">{t("fullProfileSoon")}</p>
+        <Link href={`/annuaire/praticiens/${p.slug}`} className="mt-2 inline-block font-semibold text-gold-dark underline">
+          {t("viewProfile")}
+        </Link>
       </div>
 
       <button type="button" className={btnGhost} aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((v) => !v)}>

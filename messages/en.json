@@ -3,6 +3,9 @@
     "title": "HWENDOXI — African spiritual knowledge and pharmacopoeia",
     "description": "A pan-African platform for the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia."
   },
+  "Common": {
+    "provisional": "Provisional version: this text is a working template, to be completed and reviewed by a lawyer before going into production."
+  },
   "Header": {
     "home": "HWENDOXI, home",
     "menu": "Menu",
@@ -15,7 +18,7 @@
     "cta": "List a practitioner"
   },
   "Home": {
-    "devBanner": "Development version — all data shown is fictitious",
+    "devBanner": "Test version — all data shown is fictitious",
     "heroTitle": "Preserve our knowledge. Protect our traditions. Pass on our heritage.",
     "heroText": "HWENDOXI is a pan-African platform dedicated to the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia. Explore our directory, discover the traditions and access documentary resources.",
     "exploreDirectory": "Explore the directory",
@@ -92,7 +95,7 @@
     "years": "Declared years of practice: {years}",
     "phonePublic": "Phone (publication authorised): {phone}",
     "phoneHidden": "Phone: not published (practitioner’s choice)",
-    "fullProfileSoon": "The full profile page will be available in the next stage of the project.",
+    "viewProfile": "View full profile",
     "levels": {
       "1": "Identity reviewed",
       "2": "Membership documented",
@@ -111,16 +114,129 @@
     "next": "Next",
     "pageOf": "Page {page} of {pages}"
   },
+  "Profile": {
+    "back": "← Back to home",
+    "about": "About",
+    "bioEmpty": "No presentation provided.",
+    "category": "Category",
+    "specialties": "Specialties",
+    "years": "Declared years of practice",
+    "contact": "Public contact details",
+    "noContact": "This practitioner has not authorised the publication of contact details.",
+    "copy": "Copy profile link",
+    "copied": "Link copied",
+    "verificationNote": "This level certifies that a file has been reviewed under HWENDOXI’s procedures. It does not certify powers, results or the effectiveness of any practice.",
+    "kinds": {
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "website": "Website"
+    },
+    "reportTitle": "Report this profile",
+    "reportHelp": "An error, suspected impersonation or publication without permission? Your report will be reviewed by the team. It is not published and is not an accusation.",
+    "reportMessage": "Describe the problem (10 characters minimum)",
+    "reportEmail": "Your email (optional, in case we need to follow up)",
+    "reportSend": "Send report",
+    "reportSending": "Sending…",
+    "reportThanks": "Your report has been sent to the team for review. Thank you.",
+    "reportError": "Sending failed. Please try again later."
+  },
+  "About": {
+    "title": "About HWENDOXI",
+    "intro": "HWENDOXI is a pan-African digital platform dedicated to the preservation, protection, documentation and transmission of African spiritual knowledge and pharmacopoeia.",
+    "sections": [
+      {
+        "title": "Our mission",
+        "body": "To document and promote ancestral African knowledge, make it easier to find information and profiles, and help protect communities against abuse, misconduct and identity impersonation."
+      },
+      {
+        "title": "Our four pillars",
+        "body": "Protection: protecting communities against abuse and impersonation.\nPreservation: documenting and promoting ancestral knowledge.\nTransmission: passing on knowledge with respect for traditions and communities.\nVerification: offering a transparent directory whose files are reviewed."
+      },
+      {
+        "title": "What “verified” means",
+        "body": "The verification status only certifies that certain information has been reviewed under HWENDOXI’s procedures. It does not certify spiritual powers, the results of consultations or the effectiveness of a medicinal practice. The absence of a profile or number in the directory is never proof of fraud."
+      },
+      {
+        "title": "Who publishes this site?",
+        "body": "HWENDOXI is published by PRYXA."
+      }
+    ]
+  },
+  "LegalNotice": {
+    "title": "Legal notice",
+    "intro": "Legal information about the HWENDOXI website.",
+    "sections": [
+      {
+        "title": "Site publisher",
+        "body": "PRYXA\nAddress: [to be completed]\nCountry: [to be completed]\nContact: [to be completed]"
+      },
+      {
+        "title": "Publication director",
+        "body": "[to be completed]"
+      },
+      {
+        "title": "Hosting",
+        "body": "Site: Vercel Inc. (official details to be completed).\nDatabase: Supabase (official details to be completed)."
+      },
+      {
+        "title": "Intellectual property",
+        "body": "The HWENDOXI logo, texts and content are protected. Any reproduction requires prior authorisation."
+      },
+      {
+        "title": "Disclaimers",
+        "body": "The verification status certifies the review of a file, not a practitioner’s powers or results. Information about pharmacopoeia is provided for documentary purposes and does not replace the advice of a health professional."
+      }
+    ]
+  },
+  "Privacy": {
+    "title": "Privacy policy",
+    "intro": "This page explains what data is collected on HWENDOXI, why, and how to exercise your rights.",
+    "sections": [
+      {
+        "title": "Data collected",
+        "body": "For a listing: identity, country and city, professional and spiritual information, contact details, photograph, identity document. For a report: your message and, if you wish, your email."
+      },
+      {
+        "title": "Purposes",
+        "body": "To review listing requests, publish only authorised information in the directory, protect communities against impersonation and process reports."
+      },
+      {
+        "title": "Consent and publication",
+        "body": "No information is published without the explicit consent of the person concerned. You choose, item by item, what may be made public. Your email is never published."
+      },
+      {
+        "title": "Identity documents",
+        "body": "They are used only for verification, are never published, can only be viewed by authorised verifiers, and are deleted after the committee’s decision."
+      },
+      {
+        "title": "Your rights",
+        "body": "You may request access to, correction, withdrawal or deletion of your data at any time. Contact: [to be completed]."
+      },
+      {
+        "title": "Processors",
+        "body": "Site hosting (Vercel) and database (Supabase). Exact list and location: [to be completed]."
+      },
+      {
+        "title": "Supervisory authority",
+        "body": "[to be specified according to the country: Benin and other countries concerned]"
+      }
+    ]
+  },
   "Footer": {
     "tagline": "A pan-African platform for the preservation, protection and transmission of African spiritual knowledge and pharmacopoeia.",
     "navTitle": "Navigation",
     "directory": "Directory",
     "resources": "Resources",
     "referencer": "List a practitioner",
+    "about": "About",
     "infoTitle": "Information",
     "contactTodo": "Contact: to be completed",
-    "legalSoon": "Legal notice: coming soon",
-    "privacySoon": "Privacy policy: coming soon",
+    "legal": "Legal notice",
+    "privacy": "Privacy policy",
     "publisher": "Publisher: PRYXA — © HWENDOXI"
   }
 }

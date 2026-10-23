@@ -7,16 +7,11 @@ import { Link } from "@/i18n/navigation";
 import { btnPrimary, container } from "@/lib/ui";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const links = [
-  { href: "#annuaire", key: "directory" },
-  { href: "#ressources", key: "resources" },
-  { href: "#piliers", key: "about" },
-  { href: "#contact", key: "contact" },
-] as const;
-
 export default function SiteHeader() {
   const t = useTranslations("Header");
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+  const linkClass = "text-[15px] hover:text-gold-dark";
 
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-white">
@@ -40,15 +35,12 @@ export default function SiteHeader() {
           aria-label={t("navLabel")}
           className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-full flex-col items-start gap-3 border-b border-line bg-white px-5 py-4 md:static md:ml-auto md:flex md:flex-row md:items-center md:gap-5 md:border-0 md:p-0`}
         >
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-[15px] hover:text-gold-dark" onClick={() => setOpen(false)}>
-              {t(l.key)}
-            </a>
-          ))}
+          <Link href={{ pathname: "/", hash: "annuaire" }} className={linkClass} onClick={close}>{t("directory")}</Link>
+          <Link href={{ pathname: "/", hash: "ressources" }} className={linkClass} onClick={close}>{t("resources")}</Link>
+          <Link href="/a-propos" className={linkClass} onClick={close}>{t("about")}</Link>
+          <a href="#contact" className={linkClass} onClick={close}>{t("contact")}</a>
           <LanguageSwitcher />
-          <a href="#referencer" className={btnPrimary} onClick={() => setOpen(false)}>
-            {t("cta")}
-          </a>
+          <Link href={{ pathname: "/", hash: "referencer" }} className={btnPrimary} onClick={close}>{t("cta")}</Link>
         </nav>
       </div>
     </header>
