@@ -19,13 +19,17 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-  const [base, form, deities, names] = await Promise.all([
+  const [base, form, deities, names, sections] = await Promise.all([
     import(`../../messages/${locale}.json`),
     import(`../../messages/form.${locale}.json`),
     import(`../../messages/deities.${locale}.json`),
     import(`../../messages/names.${locale}.json`),
+    import(`../../messages/sections.${locale}.json`),
   ]);
 
-  const messages = [form.default, deities.default, names.default].reduce<Json>((acc, file) => merge(acc, file as Json), base.default as Json);
+  const messages = [form.default, deities.default, names.default, sections.default].reduce<Json>(
+    (acc, file) => merge(acc, file as Json),
+    base.default as Json,
+  );
   return { locale, messages };
 });

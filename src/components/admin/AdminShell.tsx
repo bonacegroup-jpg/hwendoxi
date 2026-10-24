@@ -26,6 +26,8 @@ export default function AdminShell({
             {reviewer && <Link href="/admin/demandes" className={link}>Demandes</Link>}
             {reviewer && <Link href="/admin/signalements" className={link}>Signalements</Link>}
             {editor && <Link href="/admin/divinites" className={link}>Divinités</Link>}
+            {editor && <Link href="/admin/evenements" className={link}>Événements</Link>}
+            {staff.role === "super_admin" && <Link href="/admin/test-visage" className={link}>Test comparaison</Link>}
             {staff.role === "super_admin" && <Link href="/admin/journal" className={link}>Journal d’audit</Link>}
           </nav>
           <div className="ml-auto flex items-center gap-3 text-sm">

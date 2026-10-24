@@ -5,7 +5,9 @@ import { siteUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
-const staticPaths = ["", "/annuaire/divinites", "/referencer-un-praticien", "/a-propos", "/mentions-legales", "/confidentialite"];
+const staticPaths = ["", "/annuaire", "/annuaire/divinites", "/evenements", "/ressources", "/referencer-un-praticien", "/a-propos", "/mentions-legales", "/confidentialite"];
+
+type Row = { slug: string; published_at?: string | null; starts_at?: string | null };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = routing.locales.flatMap((l) =>
@@ -18,24 +20,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const supabase = createPublicClient();
-    const [people, deities] = await Promise.all([
+    const [people, deities, events, articles] = await Promise.all([
       supabase.from("practitioners_public").select("slug, published_at"),
       supabase.from("deities").select("slug, published_at"),
+      supabase.from("events").select("slug, starts_at"),
+      supabase.from("articles").select("slug, published_at"),
     ]);
-    const add = (rows: { slug: string; published_at: string | null }[], base: string, priority: number) => {
+    const add = (rows: Row[], base: string, priority: number) => {
       for (const row of rows) {
         for (const l of routing.locales) {
           entries.push({
             url: `${siteUrl}/${l}${base}/${row.slug}`,
-            lastModified: row.published_at ?? undefined,
+            lastModified: row.published_at ?? row.starts_at ?? undefined,
             changeFrequency: "weekly",
             priority,
           });
         }
       }
     };
-    add((people.data ?? []) as { slug: string; published_at: string | null }[], "/annuaire/praticiens", 0.8);
-    add((deities.data ?? []) as { slug: string; published_at: string | null }[], "/annuaire/divinites", 0.8);
+    add((people.data ?? []) as Row[], "/annuaire/praticiens", 0.8);
+    add((deities.data ?? []) as Row[], "/annuaire/divinites", 0.8);
+    add((events.data ?? []) as Row[], "/evenements", 0.7);
+    add((articles.data ?? []) as Row[], "/ressources", 0.7);
   } catch (error) {
     console.error("Sitemap : fiches non listées", error);
   }

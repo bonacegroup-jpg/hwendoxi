@@ -1,0 +1,64 @@
+{
+  "Nav": {
+    "directory": "Directory",
+    "deities": "Deities",
+    "events": "Events",
+    "resources": "Resources",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "DirectoryPage": {
+    "title": "Practitioner directory",
+    "intro": "Search for a practitioner or dignitary by name, specialty, country or published phone number. Only profiles reviewed by the committee are shown."
+  },
+  "HomeSections": {
+    "directoryLink": "See the full directory",
+    "eventsTitle": "Upcoming events",
+    "eventsIntro": "Cultural, spiritual, scientific and institutional events in the sector.",
+    "eventsEmpty": "No upcoming events at the moment.",
+    "eventsAll": "See all events",
+    "resourcesTitle": "Resources",
+    "resourcesText": "Documentation, news and video programmes on African spiritual knowledge and pharmacopoeia.",
+    "resourcesLink": "Discover the resources",
+    "documentation": "Documentation",
+    "news": "News",
+    "videos": "Videos and programmes"
+  },
+  "Events": {
+    "title": "Events",
+    "intro": "Calendar of cultural, spiritual, scientific and institutional events related to African spiritual knowledge and pharmacopoeia.",
+    "upcoming": "Upcoming",
+    "past": "Past events",
+    "noUpcoming": "No upcoming events at the moment.",
+    "noPast": "No past events.",
+    "state": {
+      "upcoming": "Upcoming",
+      "ongoing": "Ongoing",
+      "past": "Finished"
+    },
+    "view": "View the event",
+    "back": "← Back to events",
+    "when": "Date and time",
+    "to": "until",
+    "where": "Venue",
+    "organizer": "Organiser",
+    "contact": "Contact",
+    "register": "Register",
+    "localTime": "Times are local to the event venue.",
+    "noDescription": "Description coming soon."
+  },
+  "Resources": {
+    "title": "Resources",
+    "intro": "Reference documentation, news and video programmes. Content about pharmacopoeia is presented for documentary purposes and does not replace the advice of a health professional.",
+    "documentation": "Documentation",
+    "news": "News",
+    "videos": "Videos and programmes",
+    "emptyDocs": "No document published yet.",
+    "emptyNews": "No news published yet.",
+    "emptyVideos": "No video published yet.",
+    "read": "Read",
+    "watch": "Watch on YouTube",
+    "back": "← Back to resources",
+    "noBody": "Content coming soon."
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "Nav": {
+    "directory": "Annuaire",
+    "deities": "Divinités",
+    "events": "Événements",
+    "resources": "Ressources",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "DirectoryPage": {
+    "title": "Annuaire des praticiens",
+    "intro": "Recherchez un praticien ou un dignitaire par son nom, sa spécialité, son pays ou son numéro de téléphone publié. Seuls les profils examinés par le comité sont affichés."
+  },
+  "HomeSections": {
+    "directoryLink": "Voir tout l’annuaire",
+    "eventsTitle": "Événements à venir",
+    "eventsIntro": "Les rendez-vous culturels, spirituels, scientifiques et institutionnels du secteur.",
+    "eventsEmpty": "Aucun événement à venir pour le moment.",
+    "eventsAll": "Voir tous les événements",
+    "resourcesTitle": "Ressources",
+    "resourcesText": "Documentation, actualités et émissions vidéo sur les savoirs spirituels et la pharmacopée africaine.",
+    "resourcesLink": "Découvrir les ressources",
+    "documentation": "Documentation",
+    "news": "Actualités",
+    "videos": "Vidéos et émissions"
+  },
+  "Events": {
+    "title": "Événements",
+    "intro": "Agenda des événements culturels, spirituels, scientifiques et institutionnels liés aux savoirs spirituels et à la pharmacopée africaine.",
+    "upcoming": "À venir",
+    "past": "Événements passés",
+    "noUpcoming": "Aucun événement à venir pour le moment.",
+    "noPast": "Aucun événement passé.",
+    "state": {
+      "upcoming": "À venir",
+      "ongoing": "En cours",
+      "past": "Terminé"
+    },
+    "view": "Voir l’événement",
+    "back": "← Retour aux événements",
+    "when": "Date et heure",
+    "to": "jusqu’au",
+    "where": "Lieu",
+    "organizer": "Organisateur",
+    "contact": "Contact",
+    "register": "S’inscrire",
+    "localTime": "Les heures sont celles du lieu de l’événement.",
+    "noDescription": "Description à venir."
+  },
+  "Resources": {
+    "title": "Ressources",
+    "intro": "Documentation de référence, actualités et émissions vidéo. Les contenus relatifs à la pharmacopée sont présentés à titre documentaire et ne remplacent pas l’avis d’un professionnel de santé.",
+    "documentation": "Documentation",
+    "news": "Actualités",
+    "videos": "Vidéos et émissions",
+    "emptyDocs": "Aucun document publié pour le moment.",
+    "emptyNews": "Aucune actualité publiée pour le moment.",
+    "emptyVideos": "Aucune vidéo publiée pour le moment.",
+    "read": "Lire",
+    "watch": "Regarder sur YouTube",
+    "back": "← Retour aux ressources",
+    "noBody": "Contenu à venir."
+  }
+}
