@@ -1,5 +1,6 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
+import { slugify } from "@/lib/slug";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
@@ -52,11 +53,8 @@ async function readFile(
   return { ok: true, file: { path: `${folder}/${name}.${EXT[mime]}`, buffer, mime } };
 }
 
-const slugify = (s: string) =>
-  s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "profil";
-
 // POST /api/referencing : enregistre une demande de référencement (statut « en attente »).
-// Rien n'est publié automatiquement.
+// Rien n'est publié automatiquement. Le nom civil reste privé : seul le nom de praticien ou de dignitaire sera affiché.
 export async function POST(request: NextRequest) {
   let fd: FormData;
   try {
@@ -74,7 +72,7 @@ export async function POST(request: NextRequest) {
 
   const firstName = text(fd, "firstName", 80);
   const lastName = text(fd, "lastName", 80);
-  const spiritualName = text(fd, "spiritualName", 120);
+  const spiritualName = text(fd, "spiritualName", 120); // nom affiché publiquement
   const country = text(fd, "country", 60);
   const city = text(fd, "city", 80);
   const title = text(fd, "title", 120);
@@ -89,7 +87,7 @@ export async function POST(request: NextRequest) {
   const whatsapp = text(fd, "whatsapp", 30);
   const pub = new Set(fd.getAll("pub").filter((v): v is string => typeof v === "string" && PUBLISHABLE.has(v)));
 
-  if (!firstName || !lastName || !country || !city || !title || !tradition || specialties.length === 0 ||
+  if (!firstName || !lastName || spiritualName.length < 2 || !country || !city || !title || !tradition || specialties.length === 0 ||
       !UUID.test(category) || !Number.isInteger(years) || years < 0 || years > 80 || bio.length < 30 ||
       !EMAIL.test(email) || phone.replace(/\D/g, "").length < 7 || phone.replace(/\D/g, "").length > 15 ||
       (whatsapp && (whatsapp.replace(/\D/g, "").length < 7 || whatsapp.replace(/\D/g, "").length > 15))) {
@@ -136,10 +134,11 @@ export async function POST(request: NextRequest) {
   }
 
   const code = "HWX-" + Array.from(randomBytes(8), (b) => CODE_ALPHABET[b % CODE_ALPHABET.length]).join("");
-  const slug = `${slugify(`${firstName}-${lastName}`)}-${randomBytes(2).toString("hex")}`;
+  // L'adresse de la fiche est construite à partir du nom PUBLIC, jamais du nom civil.
+  const slug = `${slugify(spiritualName)}-${randomBytes(2).toString("hex")}`;
 
   const { error: e1 } = await admin.from("practitioners").insert({
-    id, slug, first_name: firstName, last_name: lastName, spiritual_name: spiritualName || null, title,
+    id, slug, first_name: firstName, last_name: lastName, spiritual_name: spiritualName, title,
     category_id: category, specialties, years_declared: years, bio, country, city, status: "pending",
     photo_path: photo.file?.path ?? null, photo_public: pub.has("photo") && !!photo.file,
   });

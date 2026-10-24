@@ -3,8 +3,7 @@
 export type PractitionerCard = {
   id: string;
   slug: string;
-  name: string;
-  spiritualName: string | null;
+  name: string; // nom de praticien ou de dignitaire (le nom civil n'est jamais public)
   title: string;
   country: string;
   city: string;
@@ -12,6 +11,7 @@ export type PractitionerCard = {
   level: 1 | 2 | 3;
   years: number | null;
   phone: string | null; // renseigné uniquement si le praticien a autorisé sa publication
+  photoUrl: string | null; // renseigné uniquement si le praticien a autorisé la publication de sa photo
 };
 
 export type SearchResponse = {

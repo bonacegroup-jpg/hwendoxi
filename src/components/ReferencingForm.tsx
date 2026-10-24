@@ -141,12 +141,14 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
 
       <fieldset data-step="0" hidden={step !== 0}>
         <legend className="mb-2 font-serif text-xl font-bold">{titles[0]}</legend>
+        <p className="rounded-xl bg-sand p-3 text-sm">{t("civilHelp")}</p>
         <label htmlFor="firstName" className={lab}>{t("firstName")}</label>
         <input id="firstName" name="firstName" required maxLength={80} autoComplete="given-name" className={field} />
         <label htmlFor="lastName" className={lab}>{t("lastName")}</label>
         <input id="lastName" name="lastName" required maxLength={80} autoComplete="family-name" className={field} />
-        <label htmlFor="spiritualName" className={lab}>{t("spiritualName")} <span className="font-normal text-muted">({t("optional")})</span></label>
-        <input id="spiritualName" name="spiritualName" maxLength={120} className={field} />
+        <label htmlFor="spiritualName" className={lab}>{t("spiritualName")}</label>
+        <input id="spiritualName" name="spiritualName" required minLength={2} maxLength={120} className={field} />
+        <p className="mt-1 text-xs text-muted">{t("spiritualNameHelp")}</p>
         <label htmlFor="photo" className={lab}>{t("photo")} <span className="font-normal text-muted">({t("optional")})</span></label>
         <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" className={field} />
         <label htmlFor="country" className={lab}>{t("country")}</label>

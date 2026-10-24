@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Avatar from "@/components/Avatar";
 import CopyLinkButton from "@/components/CopyLinkButton";
 import ReportForm from "@/components/ReportForm";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { publicMediaUrl } from "@/lib/media";
 import { createPublicClient } from "@/lib/supabase/public";
 import { container } from "@/lib/ui";
 
@@ -16,9 +18,7 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 type Row = {
   id: string;
   slug: string;
-  first_name: string;
-  last_name: string;
-  spiritual_name: string | null;
+  display_name: string;
   title: string;
   category_id: string | null;
   specialties: string[] | null;
@@ -27,6 +27,7 @@ type Row = {
   country: string;
   city: string;
   verification_level: number;
+  photo_path: string | null;
 };
 type Contact = { kind: string; value: string };
 
@@ -54,17 +55,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const found = await getPractitioner(slug);
   if (!found) return {};
   const { row } = found;
-  const name = `${row.first_name} ${row.last_name}`;
   const description = row.bio ? row.bio.slice(0, 155) : `${row.title} — ${row.city}, ${row.country}`;
   const path = `/annuaire/praticiens/${slug}`;
+  const photo = publicMediaUrl(row.photo_path);
   return {
-    title: name,
+    title: row.display_name,
     description,
     alternates: {
       canonical: `/${locale}${path}`,
       languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}${path}`])),
     },
-    openGraph: { title: name, description, type: "profile" },
+    openGraph: { title: row.display_name, description, type: "profile", images: photo ? [photo] : undefined },
   };
 }
 
@@ -86,16 +87,16 @@ export default async function PractitionerPage({ params }: Props) {
   if (!found) notFound();
   const { row, contacts, categoryName } = found;
 
-  const name = `${row.first_name} ${row.last_name}`;
-  const initials = `${row.first_name[0] ?? ""}${row.last_name[0] ?? ""}`;
+  const photoUrl = publicMediaUrl(row.photo_path);
   const level = (row.verification_level >= 1 && row.verification_level <= 3 ? row.verification_level : 1) as 1 | 2 | 3;
   const category = categoryName ? (categoryName[locale] ?? categoryName.fr ?? "") : "";
 
   const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
-    name,
+    name: row.display_name,
     jobTitle: row.title,
+    image: photoUrl ?? undefined,
     address: { "@type": "PostalAddress", addressLocality: row.city, addressCountry: row.country },
   }).replace(/</g, "\\u003c");
 
@@ -108,11 +109,8 @@ export default async function PractitionerPage({ params }: Props) {
 
         <div className="mt-6 grid gap-8 md:grid-cols-[320px_1fr]">
           <aside className="rounded-2xl border border-line bg-white p-6">
-            <div aria-hidden="true" className="mb-4 grid size-24 place-items-center rounded-full border-2 border-gold bg-sand font-serif text-3xl font-bold text-gold-dark">
-              {initials}
-            </div>
-            <h1 className="font-serif text-2xl font-bold leading-tight">{name}</h1>
-            {row.spiritual_name && <p className="text-muted">{row.spiritual_name}</p>}
+            <div className="mb-4"><Avatar name={row.display_name} photoUrl={photoUrl} size={112} /></div>
+            <h1 className="font-serif text-2xl font-bold leading-tight">{row.display_name}</h1>
             <p className="mt-2 font-semibold">{row.title}</p>
             <p className="text-sm text-muted">{`${row.country} · ${row.city}`}</p>
             <span className="mt-3 inline-block rounded-full border border-forest px-2.5 py-0.5 text-xs font-semibold text-forest">

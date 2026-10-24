@@ -1,0 +1,12 @@
+{
+  "Form": {
+    "civilHelp": "Your civil first and last name are used only to review your file: they are never shown publicly. Only the practitioner or dignitary name you enter below will be visible in the directory.",
+    "spiritualName": "Practitioner or dignitary name (shown publicly)",
+    "spiritualNameHelp": "This is the name under which you will be found in the directory and in the address of your profile page.",
+    "rName": "Civil name (private)",
+    "rSpiritual": "Publicly displayed name"
+  },
+  "Directory": {
+    "placeholder": "Practitioner or dignitary name, specialty, city, phone number…"
+  }
+}

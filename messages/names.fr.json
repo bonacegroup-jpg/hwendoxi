@@ -1,0 +1,12 @@
+{
+  "Form": {
+    "civilHelp": "Votre nom et votre prénom civils servent uniquement à l’examen du dossier : ils ne sont jamais affichés publiquement. Seul le nom de praticien ou de dignitaire que vous indiquez ci-dessous sera visible dans l’annuaire.",
+    "spiritualName": "Nom de praticien ou de dignitaire (affiché publiquement)",
+    "spiritualNameHelp": "C’est le nom sous lequel vous serez trouvé dans l’annuaire et dans l’adresse de votre fiche.",
+    "rName": "Nom civil (privé)",
+    "rSpiritual": "Nom affiché publiquement"
+  },
+  "Directory": {
+    "placeholder": "Nom de praticien ou de dignitaire, spécialité, ville, téléphone…"
+  }
+}

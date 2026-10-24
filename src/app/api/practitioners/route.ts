@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { publicMediaUrl } from "@/lib/media";
 import { createPublicClient } from "@/lib/supabase/public";
 import type { PractitionerCard, SearchResponse } from "@/lib/types";
 
@@ -8,21 +9,20 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 type Row = {
   id: string;
   slug: string;
-  first_name: string;
-  last_name: string;
-  spiritual_name: string | null;
+  display_name: string;
   title: string;
   specialties: string[] | null;
   years_declared: number | null;
   country: string;
   city: string;
   verification_level: number;
+  photo_path: string | null;
 };
 type ContactRow = { practitioner_id: string; kind: string; value: string };
 
 // GET /api/practitioners?q=...&country=...&category=<uuid>&level=1..3&page=1
 // Les entrées sont contrôlées ici ; la base de données applique ensuite ses propres règles
-// (seuls les profils validés et les informations autorisées sont retournés).
+// (seuls les profils validés et les informations autorisées sont retournés ; jamais le nom civil).
 export async function GET(request: NextRequest) {
   const sp = request.nextUrl.searchParams;
   const q = (sp.get("q") ?? "").trim().slice(0, 80);
@@ -66,8 +66,7 @@ export async function GET(request: NextRequest) {
   const items: PractitionerCard[] = rows.map((r) => ({
     id: r.id,
     slug: r.slug,
-    name: `${r.first_name} ${r.last_name}`,
-    spiritualName: r.spiritual_name,
+    name: r.display_name,
     title: r.title,
     country: r.country,
     city: r.city,
@@ -75,6 +74,7 @@ export async function GET(request: NextRequest) {
     level: (r.verification_level >= 1 && r.verification_level <= 3 ? r.verification_level : 1) as 1 | 2 | 3,
     years: r.years_declared,
     phone: phoneOf(r.id),
+    photoUrl: publicMediaUrl(r.photo_path),
   }));
 
   const body: SearchResponse = { items, total: Number(count.data ?? 0), page, pageSize: PAGE_SIZE };
