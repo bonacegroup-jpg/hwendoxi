@@ -1,0 +1,22 @@
+{
+  "Deities": {
+    "navLabel": "Deities",
+    "title": "Deities directory",
+    "intro": "Documented entries on African deities and spiritual traditions, with their names, cultural area and sources.",
+    "searchLabel": "Search a deity",
+    "placeholder": "Name, other name, tradition, region…",
+    "tradition": "Tradition",
+    "allTraditions": "All traditions",
+    "count": "{count, plural, =0 {No entries.} one {# entry.} other {# entries.}}",
+    "noResults": "No entry matches your search.",
+    "empty": "No entry is published yet.",
+    "view": "Read the entry",
+    "back": "← Back to the deities directory",
+    "otherNames": "Other names",
+    "region": "Region or country of origin",
+    "description": "Description",
+    "noDescription": "Description coming soon.",
+    "sources": "Documentary sources",
+    "disclaimer": "African spiritual traditions are diverse. Information specific to one community should not be regarded as universal, and only information authorised for publication is presented."
+  }
+}

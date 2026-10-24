@@ -5,7 +5,7 @@ import { siteUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
-const staticPaths = ["", "/a-propos", "/mentions-legales", "/confidentialite"];
+const staticPaths = ["", "/annuaire/divinites", "/referencer-un-praticien", "/a-propos", "/mentions-legales", "/confidentialite"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = routing.locales.flatMap((l) =>
@@ -18,19 +18,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const supabase = createPublicClient();
-    const { data } = await supabase.from("practitioners_public").select("slug, published_at");
-    for (const row of (data ?? []) as { slug: string; published_at: string | null }[]) {
-      for (const l of routing.locales) {
-        entries.push({
-          url: `${siteUrl}/${l}/annuaire/praticiens/${row.slug}`,
-          lastModified: row.published_at ?? undefined,
-          changeFrequency: "weekly",
-          priority: 0.8,
-        });
+    const [people, deities] = await Promise.all([
+      supabase.from("practitioners_public").select("slug, published_at"),
+      supabase.from("deities").select("slug, published_at"),
+    ]);
+    const add = (rows: { slug: string; published_at: string | null }[], base: string, priority: number) => {
+      for (const row of rows) {
+        for (const l of routing.locales) {
+          entries.push({
+            url: `${siteUrl}/${l}${base}/${row.slug}`,
+            lastModified: row.published_at ?? undefined,
+            changeFrequency: "weekly",
+            priority,
+          });
+        }
       }
-    }
+    };
+    add((people.data ?? []) as { slug: string; published_at: string | null }[], "/annuaire/praticiens", 0.8);
+    add((deities.data ?? []) as { slug: string; published_at: string | null }[], "/annuaire/divinites", 0.8);
   } catch (error) {
-    console.error("Sitemap : profils non listés", error);
+    console.error("Sitemap : fiches non listées", error);
   }
   return entries;
 }

@@ -9,6 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function SiteHeader() {
   const t = useTranslations("Header");
+  const td = useTranslations("Deities");
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   const linkClass = "text-[15px] hover:text-gold-dark";
@@ -36,6 +37,7 @@ export default function SiteHeader() {
           className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-full flex-col items-start gap-3 border-b border-line bg-white px-5 py-4 md:static md:ml-auto md:flex md:flex-row md:items-center md:gap-5 md:border-0 md:p-0`}
         >
           <Link href={{ pathname: "/", hash: "annuaire" }} className={linkClass} onClick={close}>{t("directory")}</Link>
+          <Link href="/annuaire/divinites" className={linkClass} onClick={close}>{td("navLabel")}</Link>
           <Link href={{ pathname: "/", hash: "ressources" }} className={linkClass} onClick={close}>{t("resources")}</Link>
           <Link href="/a-propos" className={linkClass} onClick={close}>{t("about")}</Link>
           <a href="#contact" className={linkClass} onClick={close}>{t("contact")}</a>

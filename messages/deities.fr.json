@@ -1,0 +1,22 @@
+{
+  "Deities": {
+    "navLabel": "Divinités",
+    "title": "Annuaire des divinités",
+    "intro": "Fiches documentées sur les divinités et les traditions spirituelles africaines, avec leurs appellations, leur aire culturelle et leurs sources.",
+    "searchLabel": "Rechercher une divinité",
+    "placeholder": "Nom, autre appellation, tradition, région…",
+    "tradition": "Tradition",
+    "allTraditions": "Toutes les traditions",
+    "count": "{count, plural, =0 {Aucune fiche.} one {# fiche.} other {# fiches.}}",
+    "noResults": "Aucune fiche ne correspond à votre recherche.",
+    "empty": "Aucune fiche n’est publiée pour le moment.",
+    "view": "Lire la fiche",
+    "back": "← Retour à l’annuaire des divinités",
+    "otherNames": "Autres appellations",
+    "region": "Région ou pays d’origine",
+    "description": "Description",
+    "noDescription": "Description à venir.",
+    "sources": "Sources documentaires",
+    "disclaimer": "Les traditions spirituelles africaines sont diverses. Une information propre à une communauté ne doit pas être considérée comme universelle, et seules les informations dont la publication est autorisée sont présentées."
+  }
+}

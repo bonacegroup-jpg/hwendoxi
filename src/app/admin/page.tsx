@@ -9,6 +9,7 @@ const STATUSES = ["pending", "needs_changes", "approved", "rejected", "suspended
 export default async function AdminHome() {
   const staff = await requireStaff();
   const reviewer = staff.role === "super_admin" || staff.role === "verifier";
+  const editor = staff.role === "super_admin" || staff.role === "editor";
 
   const counts: Record<string, number> = {};
   if (reviewer) {
@@ -23,7 +24,7 @@ export default async function AdminHome() {
   return (
     <AdminShell staff={staff}>
       <h1 className="mb-6 font-serif text-3xl font-bold">Tableau de bord</h1>
-      {reviewer ? (
+      {reviewer && (
         <>
           <div className="grid gap-4 md:grid-cols-5">
             {STATUSES.map((s) => (
@@ -37,9 +38,13 @@ export default async function AdminHome() {
             <Link href="/admin/demandes" className="font-semibold text-gold-dark underline">Examiner les demandes en cours</Link>
           </p>
         </>
-      ) : (
-        <p className="text-muted">La gestion des contenus (divinités, articles, vidéos, événements) arrivera dans une prochaine version.</p>
       )}
+      {editor && (
+        <p className="mt-6">
+          <Link href="/admin/divinites" className="font-semibold text-gold-dark underline">Gérer les fiches de divinités</Link>
+        </p>
+      )}
+      <p className="mt-6 text-sm text-muted">Les autres contenus (documentation, actualités, vidéos, événements) arriveront dans une prochaine version.</p>
     </AdminShell>
   );
 }

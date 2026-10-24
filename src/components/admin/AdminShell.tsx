@@ -11,6 +11,7 @@ export default function AdminShell({
   children: React.ReactNode;
 }) {
   const reviewer = staff.role === "super_admin" || staff.role === "verifier";
+  const editor = staff.role === "super_admin" || staff.role === "editor";
   const link = "text-[15px] hover:text-gold-dark";
   return (
     <>
@@ -24,6 +25,7 @@ export default function AdminShell({
             <Link href="/admin" className={link}>Tableau de bord</Link>
             {reviewer && <Link href="/admin/demandes" className={link}>Demandes</Link>}
             {reviewer && <Link href="/admin/signalements" className={link}>Signalements</Link>}
+            {editor && <Link href="/admin/divinites" className={link}>Divinités</Link>}
             {staff.role === "super_admin" && <Link href="/admin/journal" className={link}>Journal d’audit</Link>}
           </nav>
           <div className="ml-auto flex items-center gap-3 text-sm">
