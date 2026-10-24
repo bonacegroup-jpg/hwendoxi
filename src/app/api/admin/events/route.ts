@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
   const req = await readRequest(request);
   if (!req) return err("invalid_request");
   const p = parse(req.data);
-  if ("error" in p) return err(p.error);
+  if (p.error !== undefined || !p.value) return err(p.error ?? "invalid_request");
   const v = p.value;
 
   const id = crypto.randomUUID();
@@ -133,7 +133,7 @@ export async function PUT(request: NextRequest) {
   const req = await readRequest(request);
   if (!req) return err("invalid_request");
   const p = parse(req.data);
-  if ("error" in p) return err(p.error);
+  if (p.error !== undefined || !p.value) return err(p.error ?? "invalid_request");
   const v = p.value;
   if (!UUID.test(v.id)) return err("invalid_request");
 
