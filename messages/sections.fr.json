@@ -60,5 +60,36 @@
     "watch": "Regarder sur YouTube",
     "back": "← Retour aux ressources",
     "noBody": "Contenu à venir."
+  },
+  "Edit": {
+    "title": "Modifier mon dossier ou mon profil",
+    "intro": "Saisissez votre code de suivi et l’adresse e-mail utilisée lors du dépôt de votre dossier. Si votre dossier est en cours d’examen ou si le comité a demandé des corrections, vos changements remplacent le dossier. Si votre profil est déjà publié, vos changements sont soumis au comité : le profil affiché ne change qu’après son accord.",
+    "codeLabel": "Code de suivi",
+    "emailLabel": "Adresse e-mail déclarée",
+    "open": "Ouvrir mon dossier",
+    "wrongCredentials": "Code ou adresse e-mail incorrects.",
+    "lostCode": "Code de suivi perdu ? Contactez l’équipe de HWENDOXI, qui pourra en générer un nouveau après vérification de votre identité.",
+    "statusLabel": "Statut actuel",
+    "committeeMessage": "Message du comité",
+    "cannotEdit": "Ce dossier ne peut plus être modifié ici. Contactez l’équipe de HWENDOXI.",
+    "pendingChange": "Une demande de modification est déjà en cours d’examen. Vous pourrez en envoyer une nouvelle après la décision du comité.",
+    "noticePending": "Vos corrections seront examinées par le comité avant toute publication.",
+    "noticeApproved": "Votre profil actuel reste affiché tant que le comité n’a pas approuvé vos modifications.",
+    "civilLocked": "Votre nom civil ne peut pas être modifié ici : contactez l’équipe de HWENDOXI.",
+    "newPhoto": "Nouvelle photo de profil (laissez vide pour conserver l’actuelle)",
+    "newId": "Nouvelle pièce d’identité (laissez vide pour conserver l’actuelle)",
+    "sendPending": "Envoyer mes corrections",
+    "sendChange": "Envoyer ma demande de modification",
+    "doneResubmitted": "Vos corrections ont bien été reçues. Votre dossier repasse « En attente de validation » et sera examiné par le comité.",
+    "doneChange": "Votre demande de modification a bien été reçue. Votre profil actuel reste affiché jusqu’à la décision du comité.",
+    "errPending": "Une demande est déjà en cours d’examen.",
+    "errNotEditable": "Ce dossier ne peut plus être modifié.",
+    "footerLink": "Modifier mon dossier ou mon profil"
+  },
+  "Tracking": {
+    "editLink": "Corriger mon dossier ou modifier mon profil"
+  },
+  "Form": {
+    "editLink": "Modifier mon dossier ou mon profil"
   }
 }

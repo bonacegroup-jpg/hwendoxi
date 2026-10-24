@@ -37,6 +37,8 @@ export default async function ReferencerPage({ params }: Props) {
         <p className="mt-3 text-muted">{t("intro")}</p>
         <p className="mb-6 mt-2 text-sm">
           <Link href="/referencer-un-praticien/suivi" className="text-gold-dark underline">{t("trackLink")}</Link>
+          {" · "}
+          <Link href="/referencer-un-praticien/modifier" className="text-gold-dark underline">{t("editLink")}</Link>
         </p>
         <ReferencingForm categories={categories} />
       </main>

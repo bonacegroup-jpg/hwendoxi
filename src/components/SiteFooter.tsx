@@ -6,6 +6,7 @@ import { container } from "@/lib/ui";
 export default function SiteFooter() {
   const t = useTranslations("Footer");
   const n = useTranslations("Nav");
+  const te = useTranslations("Edit");
 
   return (
     <footer id="contact" className="border-t border-line bg-white py-10 text-sm text-muted">
@@ -22,6 +23,7 @@ export default function SiteFooter() {
             <li><Link href="/evenements">{n("events")}</Link></li>
             <li><Link href="/ressources">{n("resources")}</Link></li>
             <li><Link href="/referencer-un-praticien">{t("referencer")}</Link></li>
+            <li><Link href="/referencer-un-praticien/modifier">{te("footerLink")}</Link></li>
             <li><Link href="/a-propos">{n("about")}</Link></li>
           </ul>
         </div>

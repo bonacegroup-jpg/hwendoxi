@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdminShell from "@/components/admin/AdminShell";
 import DecisionForm from "@/components/admin/DecisionForm";
+import TrackingCodeButton from "@/components/admin/TrackingCodeButton";
 import { requireStaff, STATUS_LABEL } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -94,6 +95,7 @@ export default async function RequestDetail({ params }: { params: Promise<{ id: 
             )}
           </section>
           <DecisionForm id={p.id} status={p.status} hasMemberCard={!!pr?.member_card_path} />
+          <TrackingCodeButton id={p.id} />
         </aside>
       </div>
     </AdminShell>

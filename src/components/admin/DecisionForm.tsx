@@ -74,7 +74,7 @@ export default function DecisionForm({ id, status, hasMemberCard }: { id: string
         {status === "approved" && <button type="button" className={btnGhost} disabled={busy} onClick={() => send("suspend")}>Suspendre le profil</button>}
       </div>
       {message && <p role="alert" className="mt-3 text-sm">{message}</p>}
-      <p className="mt-3 text-xs text-muted">Le motif est conservé dans les notes internes et le journal d’audit. Aucun e-mail n’est envoyé automatiquement : contactez la personne à l’adresse indiquée si nécessaire.</p>
+      <p className="mt-3 text-xs text-muted">Pour une demande de corrections ou un refus, ce message est affiché à la personne quand elle ouvre « Modifier mon dossier » avec son code de suivi et son e-mail. Aucun e-mail n’est envoyé automatiquement : prévenez-la à l’adresse indiquée.</p>
     </section>
   );
 }

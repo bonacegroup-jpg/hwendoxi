@@ -60,5 +60,36 @@
     "watch": "Watch on YouTube",
     "back": "← Back to resources",
     "noBody": "Content coming soon."
+  },
+  "Edit": {
+    "title": "Edit my file or my profile",
+    "intro": "Enter your tracking code and the email address used when you submitted your file. If your file is under review or the committee asked for corrections, your changes replace the file. If your profile is already published, your changes are submitted to the committee: the displayed profile only changes after its approval.",
+    "codeLabel": "Tracking code",
+    "emailLabel": "Email address on file",
+    "open": "Open my file",
+    "wrongCredentials": "Incorrect code or email address.",
+    "lostCode": "Lost your tracking code? Contact the HWENDOXI team, who can generate a new one after verifying your identity.",
+    "statusLabel": "Current status",
+    "committeeMessage": "Message from the committee",
+    "cannotEdit": "This file can no longer be edited here. Please contact the HWENDOXI team.",
+    "pendingChange": "A modification request is already under review. You can send a new one after the committee’s decision.",
+    "noticePending": "Your corrections will be reviewed by the committee before anything is published.",
+    "noticeApproved": "Your current profile stays displayed until the committee approves your changes.",
+    "civilLocked": "Your civil name cannot be changed here: please contact the HWENDOXI team.",
+    "newPhoto": "New profile photo (leave empty to keep the current one)",
+    "newId": "New identity document (leave empty to keep the current one)",
+    "sendPending": "Send my corrections",
+    "sendChange": "Send my modification request",
+    "doneResubmitted": "Your corrections have been received. Your file goes back to “Awaiting validation” and will be reviewed by the committee.",
+    "doneChange": "Your modification request has been received. Your current profile stays displayed until the committee decides.",
+    "errPending": "A request is already under review.",
+    "errNotEditable": "This file can no longer be edited.",
+    "footerLink": "Edit my file or my profile"
+  },
+  "Tracking": {
+    "editLink": "Correct my file or edit my profile"
+  },
+  "Form": {
+    "editLink": "Edit my file or my profile"
   }
 }

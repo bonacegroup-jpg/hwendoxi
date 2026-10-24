@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { Link } from "@/i18n/navigation";
 import { btnPrimary } from "@/lib/ui";
 
 type Result = { status: string; submittedAt: string } | "not_found" | "error" | null;
@@ -44,6 +45,7 @@ export default function TrackingForm() {
       <input id="code" required className={field} placeholder="HWX-XXXXXXXX" value={code} onChange={(e) => setCode(e.target.value)} />
       <button type="submit" className={btnPrimary} disabled={busy}>{t("check")}</button>
       <p role="status" aria-live="polite" className="text-sm">{message}</p>
+      <Link href="/referencer-un-praticien/modifier" className="inline-block text-sm font-semibold text-gold-dark underline">{t("editLink")}</Link>
     </form>
   );
 }

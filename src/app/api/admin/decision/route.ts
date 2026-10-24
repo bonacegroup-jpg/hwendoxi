@@ -80,6 +80,8 @@ export async function POST(request: NextRequest) {
   }
   const line = `${new Date().toLocaleDateString("fr-FR")} — ${staff.name} — ${action}${action === "approve" ? ` niveau ${level}` : ""}${note ? ` : ${note}` : ""}`;
   privUpdate.internal_notes = [priv?.internal_notes, line].filter(Boolean).join("\n");
+  if (action === "fix" || action === "reject") privUpdate.applicant_message = note;
+  else if (action === "approve") privUpdate.applicant_message = null;
 
   const r1 = await admin.from("practitioners").update(update).eq("id", id);
   if (r1.error) {

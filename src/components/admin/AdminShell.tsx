@@ -24,6 +24,7 @@ export default function AdminShell({
           <nav className="ml-4 flex flex-wrap gap-4">
             <Link href="/admin" className={link}>Tableau de bord</Link>
             {reviewer && <Link href="/admin/demandes" className={link}>Demandes</Link>}
+            {reviewer && <Link href="/admin/modifications" className={link}>Modifications</Link>}
             {reviewer && <Link href="/admin/signalements" className={link}>Signalements</Link>}
             {editor && <Link href="/admin/divinites" className={link}>Divinités</Link>}
             {editor && <Link href="/admin/evenements" className={link}>Événements</Link>}
