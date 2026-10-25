@@ -16,8 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: t("title"), description: t("intro") };
 }
 
-export default async function DirectoryPage({ params }: Props) {
+export default async function DirectoryPage({ params, searchParams }: Props & { searchParams: Promise<{ q?: string }> }) {
   const { locale } = await params;
+  const { q } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("DirectoryPage");
   const { categories, countries } = await getDirectoryFilters(locale);
@@ -31,7 +32,7 @@ export default async function DirectoryPage({ params }: Props) {
           <p className="mt-2 max-w-3xl text-muted">{t("intro")}</p>
         </div>
         <div className="mt-6">
-          <DirectoryPreview categories={categories} countries={countries} />
+          <DirectoryPreview categories={categories} countries={countries} initialQuery={(q ?? "").slice(0, 80)} />
         </div>
       </main>
       <SiteFooter />

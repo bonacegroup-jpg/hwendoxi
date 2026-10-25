@@ -10,6 +10,7 @@ type Article = { id: string; kind: string; title: L; status: string; updated_at:
 type Video = { id: string; youtube_id: string; title: L; status: string; updated_at: string };
 const STATUS: Record<string, string> = { draft: "Brouillon", published: "Publié", archived: "Archivé" };
 
+// Ordre des rubriques : Actualités, Vidéos et émissions, Documentation.
 export default async function ResourcesAdminPage() {
   const staff = await requireStaff(["super_admin", "editor"]);
   const [articles, videos] = await Promise.all([
@@ -17,9 +18,9 @@ export default async function ResourcesAdminPage() {
     staff.supabase.from("videos").select("id, youtube_id, title, status, updated_at").order("updated_at", { ascending: false }).limit(200),
   ]);
   const arts = (articles.data ?? []) as Article[];
-  const vids = (videos.data ?? []) as Video[];
-  const docs = arts.filter((a) => a.kind === "documentation");
   const news = arts.filter((a) => a.kind === "news");
+  const docs = arts.filter((a) => a.kind === "documentation");
+  const vids = (videos.data ?? []) as Video[];
 
   const table = (rows: Article[], empty: string) =>
     rows.length === 0 ? (
@@ -43,15 +44,12 @@ export default async function ResourcesAdminPage() {
 
   return (
     <AdminShell staff={staff}>
-      <h1 className="mb-6 font-serif text-3xl font-bold">Ressources</h1>
+      <h1 className="mb-2 font-serif text-3xl font-bold">Ressources</h1>
+      <p className="mb-6 text-sm text-muted">
+        Pour choisir ce qui apparaît sur la page d’accueil : <Link href="/admin/accueil" className="font-semibold text-gold-dark underline">gérer la page d’accueil</Link>.
+      </p>
 
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-serif text-2xl font-bold">Documentation</h2>
-        <Link href="/admin/ressources/articles/nouveau?type=documentation" className={btnPrimary}>Nouveau document</Link>
-      </div>
-      {table(docs, "Aucun document.")}
-
-      <div className="mb-3 mt-10 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-serif text-2xl font-bold">Actualités</h2>
         <Link href="/admin/ressources/articles/nouveau?type=news" className={btnPrimary}>Nouvelle actualité</Link>
       </div>
@@ -79,6 +77,12 @@ export default async function ResourcesAdminPage() {
           </table>
         </div>
       )}
+
+      <div className="mb-3 mt-10 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="font-serif text-2xl font-bold">Documentation</h2>
+        <Link href="/admin/ressources/articles/nouveau?type=documentation" className={btnPrimary}>Nouveau document</Link>
+      </div>
+      {table(docs, "Aucun document.")}
     </AdminShell>
   );
 }

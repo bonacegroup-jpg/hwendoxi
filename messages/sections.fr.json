@@ -22,7 +22,14 @@
     "resourcesLink": "Découvrir les ressources",
     "documentation": "Documentation",
     "news": "Actualités",
-    "videos": "Vidéos et émissions"
+    "videos": "Vidéos et émissions",
+    "practitionersTitle": "Annuaire",
+    "searchButton": "Rechercher",
+    "noFeatured": "Aucun élément mis en avant pour le moment.",
+    "newsTitle": "Actualités",
+    "videosTitle": "Vidéos et émissions",
+    "docsTitle": "Documentation",
+    "seeAll": "Voir tout"
   },
   "Events": {
     "title": "Événements",

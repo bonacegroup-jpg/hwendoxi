@@ -13,12 +13,14 @@ const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base
 export default function DirectoryPreview({
   categories,
   countries,
+  initialQuery = "",
 }: {
   categories: CategoryOption[];
   countries: string[];
+  initialQuery?: string;
 }) {
   const t = useTranslations("Directory");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [country, setCountry] = useState("");
   const [category, setCategory] = useState("");
   const [level, setLevel] = useState("");

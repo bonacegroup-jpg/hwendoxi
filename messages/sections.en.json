@@ -22,7 +22,14 @@
     "resourcesLink": "Discover the resources",
     "documentation": "Documentation",
     "news": "News",
-    "videos": "Videos and programmes"
+    "videos": "Videos and programmes",
+    "practitionersTitle": "Directory",
+    "searchButton": "Search",
+    "noFeatured": "Nothing is featured at the moment.",
+    "newsTitle": "News",
+    "videosTitle": "Videos and programmes",
+    "docsTitle": "Documentation",
+    "seeAll": "See all"
   },
   "Events": {
     "title": "Events",
