@@ -91,6 +91,7 @@
     "editLink": "Correct my file or edit my profile"
   },
   "Form": {
-    "editLink": "Edit my file or my profile"
+    "editLink": "Edit my file or my profile",
+    "errBot": "The anti-robot check failed. Please reload the page and try again."
   }
 }

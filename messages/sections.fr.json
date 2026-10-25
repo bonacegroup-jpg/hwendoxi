@@ -91,6 +91,7 @@
     "editLink": "Corriger mon dossier ou modifier mon profil"
   },
   "Form": {
-    "editLink": "Modifier mon dossier ou mon profil"
+    "editLink": "Modifier mon dossier ou mon profil",
+    "errBot": "La vérification anti-robot a échoué. Rechargez la page et réessayez."
   }
 }

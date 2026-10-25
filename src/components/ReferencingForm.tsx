@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { CategoryOption } from "@/lib/types";
 import { btnGhost, btnPrimary } from "@/lib/ui";
+import Turnstile, { turnstileEnabled } from "./Turnstile";
 
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
 const lab = "mb-1 mt-4 block text-sm font-semibold";
@@ -45,6 +46,8 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [code, setCode] = useState("");
+  const [token, setToken] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -101,6 +104,7 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
       }
     }
     fd.set("startedAt", String(startedAt.current));
+    fd.set("cf-turnstile-response", token);
     try {
       const res = await fetch("/api/referencing", { method: "POST", body: fd });
       if (res.ok) {
@@ -111,6 +115,7 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
           res.status === 429 ? t("errTooMany")
           : res.status === 413 ? t("errTooLarge")
           : data.error === "invalid_file" ? t("errFile")
+          : data.error === "bot_check" ? t("errBot")
           : data.error === "photo_rights" ? t("errPhotoRights")
           : data.error === "invalid_field" ? t("errInvalid")
           : t("errGeneric"),
@@ -120,6 +125,8 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
       setError(t("errGeneric"));
     }
     setBusy(false);
+    setToken("");
+    setWidgetKey((k) => k + 1);
   }
 
   if (code) {
@@ -229,6 +236,7 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
           </dl>
         )}
         <p className="mt-4 rounded-xl bg-sand p-3 text-sm">{t("sendNotice")}</p>
+        {step === 4 && <Turnstile key={widgetKey} onToken={setToken} />}
         <div aria-hidden="true" className="hidden"><input name="company" tabIndex={-1} autoComplete="off" /></div>
       </fieldset>
 
@@ -239,7 +247,7 @@ export default function ReferencingForm({ categories }: { categories: CategoryOp
         {step < 4 ? (
           <button type="button" className={btnPrimary} onClick={next}>{t("next")}</button>
         ) : (
-          <button type="submit" className={btnPrimary} disabled={busy}>{busy ? t("sending") : t("send")}</button>
+          <button type="submit" className={btnPrimary} disabled={busy || (turnstileEnabled && !token)}>{busy ? t("sending") : t("send")}</button>
         )}
       </div>
     </form>

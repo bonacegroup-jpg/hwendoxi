@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { findApplicant } from "@/lib/applicant";
 import type { AccessResponse } from "@/lib/edit-types";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -16,9 +17,10 @@ type P = {
 // uniquement si le code de suivi ET l'adresse e-mail déclarée correspondent.
 export async function POST(request: NextRequest) {
   if (!(await rateLimit(request, "referencing-access", 10, 600))) return NextResponse.json({ error: "too_many" }, { status: 429 });
-  const body = (await request.json().catch(() => null)) as { code?: unknown; email?: unknown } | null;
+  const body = (await request.json().catch(() => null)) as { code?: unknown; email?: unknown; turnstile?: unknown } | null;
   const code = typeof body?.code === "string" ? body.code.trim().toUpperCase().slice(0, 30) : "";
   const email = typeof body?.email === "string" ? body.email.trim().slice(0, 200) : "";
+  if (!(await verifyTurnstile(typeof body?.turnstile === "string" ? body.turnstile : ""))) return NextResponse.json({ error: "bot_check" }, { status: 403 });
   if (!/^HWX-[A-Z0-9]{8}$/.test(code) || !email) return NextResponse.json({ error: "not_found" }, { status: 404 });
 
   const admin = createAdminClient();

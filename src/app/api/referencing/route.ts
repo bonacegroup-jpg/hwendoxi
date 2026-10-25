@@ -1,6 +1,7 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { slugify } from "@/lib/slug";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -64,6 +65,7 @@ export async function POST(request: NextRequest) {
   } catch {
     return fail("invalid_form");
   }
+  if (!(await verifyTurnstile(String(fd.get("cf-turnstile-response") ?? "")))) return fail("bot_check", 403);
 
   // Robots : champ piège rempli ou formulaire envoyé trop vite (moins de 10 s) / trop tard (plus de 6 h)
   const started = Number(text(fd, "startedAt", 20));

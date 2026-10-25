@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { btnGhost } from "@/lib/ui";
+import Turnstile, { turnstileEnabled } from "./Turnstile";
 
 type Status = "idle" | "sending" | "done" | "error";
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
@@ -13,6 +14,8 @@ export default function ReportForm({ practitionerId }: { practitionerId: string 
   const [email, setEmail] = useState("");
   const [trap, setTrap] = useState(""); // champ piège invisible : seuls les robots le remplissent
   const [status, setStatus] = useState<Status>("idle");
+  const [token, setToken] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -21,12 +24,14 @@ export default function ReportForm({ practitionerId }: { practitionerId: string 
       const res = await fetch("/api/reports", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ targetId: practitionerId, message, email, website: trap }),
+        body: JSON.stringify({ targetId: practitionerId, message, email, website: trap, turnstile: token }),
       });
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");
     }
+    setToken("");
+    setWidgetKey((k) => k + 1);
   }
 
   return (
@@ -45,7 +50,8 @@ export default function ReportForm({ practitionerId }: { practitionerId: string 
           <div aria-hidden="true" className="hidden">
             <input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
           </div>
-          <button type="submit" className={btnGhost} disabled={status === "sending"}>
+          <Turnstile key={widgetKey} onToken={setToken} />
+          <button type="submit" className={btnGhost} disabled={status === "sending" || (turnstileEnabled && !token)}>
             {status === "sending" ? t("reportSending") : t("reportSend")}
           </button>
           {status === "error" && <p role="alert" className="text-sm">{t("reportError")}</p>}

@@ -6,6 +6,7 @@ import type { AccessResponse } from "@/lib/edit-types";
 import { prepareFile } from "@/lib/image-client";
 import type { CategoryOption } from "@/lib/types";
 import { btnPrimary } from "@/lib/ui";
+import Turnstile, { turnstileEnabled } from "./Turnstile";
 
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
 const lab = "mb-1 mt-4 block text-sm font-semibold";
@@ -25,6 +26,8 @@ export default function EditProfile({ categories }: { categories: CategoryOption
   const [mode, setMode] = useState<"resubmitted" | "change_requested">("resubmitted");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [token, setToken] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
 
   async function open(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,18 +37,20 @@ export default function EditProfile({ categories }: { categories: CategoryOption
       const res = await fetch("/api/referencing/access", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, email }),
+        body: JSON.stringify({ code, email, turnstile: token }),
       });
       if (res.ok) {
         setAccess((await res.json()) as AccessResponse);
         setStage("form");
       } else {
-        setError(res.status === 404 ? t("wrongCredentials") : f("errGeneric"));
+        setError(res.status === 404 ? t("wrongCredentials") : res.status === 403 ? f("errBot") : f("errGeneric"));
       }
     } catch {
       setError(f("errGeneric"));
     }
     setBusy(false);
+    setToken("");
+    setWidgetKey((k) => k + 1);
   }
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -110,7 +115,8 @@ export default function EditProfile({ categories }: { categories: CategoryOption
         <label htmlFor="email" className="block text-sm font-semibold">{t("emailLabel")}</label>
         <input id="email" type="email" required className={field} value={email} onChange={(e) => setEmail(e.target.value)} />
         {error && <p role="alert" className="text-sm">{error}</p>}
-        <button type="submit" className={btnPrimary} disabled={busy}>{t("open")}</button>
+        <Turnstile key={widgetKey} onToken={setToken} />
+        <button type="submit" className={btnPrimary} disabled={busy || (turnstileEnabled && !token)}>{t("open")}</button>
         <p className="text-xs text-muted">{t("lostCode")}</p>
       </form>
     );

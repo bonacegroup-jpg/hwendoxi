@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
@@ -9,12 +10,15 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   if (!(await rateLimit(request, "referencing-status", 15, 600))) return NextResponse.json({ error: "too_many" }, { status: 429 });
   let code = "";
+  let token = "";
   try {
-    const body = (await request.json()) as { code?: unknown };
+    const body = (await request.json()) as { code?: unknown; turnstile?: unknown };
+    token = typeof body.turnstile === "string" ? body.turnstile : "";
     code = typeof body.code === "string" ? body.code.trim().toUpperCase().slice(0, 30) : "";
   } catch {
     return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
+  if (!(await verifyTurnstile(token))) return NextResponse.json({ error: "bot_check" }, { status: 403 });
   if (!/^HWX-[A-Z0-9]{8}$/.test(code)) return NextResponse.json({ error: "not_found" }, { status: 404 });
 
   const admin = createAdminClient();

@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { createPublicClient } from "@/lib/supabase/public";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -14,6 +15,8 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
+
+  if (!(await verifyTurnstile(typeof body.turnstile === "string" ? body.turnstile : ""))) return NextResponse.json({ error: "bot_check" }, { status: 403 });
 
   // Champ piège rempli = robot : on répond "ok" sans rien enregistrer.
   if (typeof body.website === "string" && body.website.trim() !== "") {

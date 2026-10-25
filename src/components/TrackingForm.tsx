@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { btnPrimary } from "@/lib/ui";
+import Turnstile, { turnstileEnabled } from "./Turnstile";
 
 type Result = { status: string; submittedAt: string } | "not_found" | "error" | null;
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
@@ -14,6 +15,8 @@ export default function TrackingForm() {
   const [code, setCode] = useState("");
   const [result, setResult] = useState<Result>(null);
   const [busy, setBusy] = useState(false);
+  const [token, setToken] = useState("");
+  const [widgetKey, setWidgetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,7 +25,7 @@ export default function TrackingForm() {
       const res = await fetch("/api/referencing/status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ code, turnstile: token }),
       });
       if (res.status === 404) setResult("not_found");
       else if (!res.ok) setResult("error");
@@ -31,6 +34,8 @@ export default function TrackingForm() {
       setResult("error");
     }
     setBusy(false);
+    setToken("");
+    setWidgetKey((k) => k + 1);
   }
 
   const message =
@@ -43,7 +48,8 @@ export default function TrackingForm() {
     <form onSubmit={onSubmit} className="mt-6 max-w-md space-y-3 rounded-2xl border border-line bg-white p-6">
       <label htmlFor="code" className="block text-sm font-semibold">{t("codeLabel")}</label>
       <input id="code" required className={field} placeholder="HWX-XXXXXXXX" value={code} onChange={(e) => setCode(e.target.value)} />
-      <button type="submit" className={btnPrimary} disabled={busy}>{t("check")}</button>
+      <Turnstile key={widgetKey} onToken={setToken} />
+      <button type="submit" className={btnPrimary} disabled={busy || (turnstileEnabled && !token)}>{t("check")}</button>
       <p role="status" aria-live="polite" className="text-sm">{message}</p>
       <Link href="/referencer-un-praticien/modifier" className="inline-block text-sm font-semibold text-gold-dark underline">{t("editLink")}</Link>
     </form>
