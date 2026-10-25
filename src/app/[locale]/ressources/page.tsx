@@ -70,13 +70,13 @@ export default async function ResourcesPage({ params }: Props) {
           <div className="grid gap-4 md:grid-cols-3">
             {vids.map((v) => (
               <article key={v.youtube_id} className="overflow-hidden rounded-2xl border border-line bg-white">
-                <a href={`https://www.youtube.com/watch?v=${v.youtube_id}`} rel="noopener noreferrer" aria-label={t("watch")}>
+                <Link href={`/videos/${v.youtube_id}`} aria-label={t("watch")}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={`https://i.ytimg.com/vi/${v.youtube_id}/hqdefault.jpg`} alt="" loading="lazy" className="aspect-video w-full object-cover" />
-                </a>
+                </Link>
                 <div className="p-4">
                   <h3 className="font-serif font-bold leading-tight">{pickText(v.title, locale)}</h3>
-                  <a href={`https://www.youtube.com/watch?v=${v.youtube_id}`} rel="noopener noreferrer" className="mt-2 inline-block text-sm font-semibold text-gold-dark underline">{t("watch")}</a>
+                  <Link href={`/videos/${v.youtube_id}`} className="mt-2 inline-block text-sm font-semibold text-gold-dark underline">{t("watch")}</Link>
                 </div>
               </article>
             ))}

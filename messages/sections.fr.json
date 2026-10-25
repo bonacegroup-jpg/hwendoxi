@@ -57,9 +57,10 @@
     "emptyNews": "Aucune actualité publiée pour le moment.",
     "emptyVideos": "Aucune vidéo publiée pour le moment.",
     "read": "Lire",
-    "watch": "Regarder sur YouTube",
+    "watch": "Regarder la vidéo",
     "back": "← Retour aux ressources",
-    "noBody": "Contenu à venir."
+    "noBody": "Contenu à venir.",
+    "onYoutube": "Voir aussi sur YouTube"
   },
   "Edit": {
     "title": "Modifier mon dossier ou mon profil",

@@ -57,9 +57,10 @@
     "emptyNews": "No news published yet.",
     "emptyVideos": "No video published yet.",
     "read": "Read",
-    "watch": "Watch on YouTube",
+    "watch": "Watch the video",
     "back": "← Back to resources",
-    "noBody": "Content coming soon."
+    "noBody": "Content coming soon.",
+    "onYoutube": "Also on YouTube"
   },
   "Edit": {
     "title": "Edit my file or my profile",
