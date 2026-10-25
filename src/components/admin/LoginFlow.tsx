@@ -108,6 +108,7 @@ export default function LoginFlow() {
         <input id="password" type="password" required autoComplete="current-password" className={field} value={password} onChange={(e) => setPassword(e.target.value)} />
         {error && <p role="alert" className="text-sm">{error}</p>}
         <button type="submit" className={btnPrimary} disabled={busy}>Continuer</button>
+        <p className="text-sm"><a href="/admin/reinitialisation" className="underline">Mot de passe oublié ?</a></p>
       </form>
     );
   }

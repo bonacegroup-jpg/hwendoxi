@@ -1,5 +1,6 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { slugify } from "@/lib/slug";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -56,6 +57,7 @@ async function readFile(
 // POST /api/referencing : enregistre une demande de référencement (statut « en attente »).
 // Rien n'est publié automatiquement. Le nom civil reste privé : seul le nom de praticien ou de dignitaire sera affiché.
 export async function POST(request: NextRequest) {
+  if (!(await rateLimit(request, "referencing", 6, 3600))) return fail("too_many", 429);
   let fd: FormData;
   try {
     fd = await request.formData();

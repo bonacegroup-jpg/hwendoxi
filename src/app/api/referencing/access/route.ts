@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { findApplicant } from "@/lib/applicant";
 import type { AccessResponse } from "@/lib/edit-types";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -14,6 +15,7 @@ type P = {
 // POST /api/referencing/access {code, email} : renvoie les informations modifiables d'un dossier,
 // uniquement si le code de suivi ET l'adresse e-mail déclarée correspondent.
 export async function POST(request: NextRequest) {
+  if (!(await rateLimit(request, "referencing-access", 10, 600))) return NextResponse.json({ error: "too_many" }, { status: 429 });
   const body = (await request.json().catch(() => null)) as { code?: unknown; email?: unknown } | null;
   const code = typeof body?.code === "string" ? body.code.trim().toUpperCase().slice(0, 30) : "";
   const email = typeof body?.email === "string" ? body.email.trim().slice(0, 200) : "";

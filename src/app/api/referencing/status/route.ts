@@ -1,11 +1,13 @@
 import { createHash } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
 
 // POST /api/referencing/status {code} : indique l'état d'un dossier à partir du code de suivi.
 export async function POST(request: NextRequest) {
+  if (!(await rateLimit(request, "referencing-status", 15, 600))) return NextResponse.json({ error: "too_many" }, { status: 429 });
   let code = "";
   try {
     const body = (await request.json()) as { code?: unknown };

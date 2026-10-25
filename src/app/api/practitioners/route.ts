@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { publicMediaUrl } from "@/lib/media";
 import { createPublicClient } from "@/lib/supabase/public";
 import type { PractitionerCard, SearchResponse } from "@/lib/types";
@@ -24,6 +25,7 @@ type ContactRow = { practitioner_id: string; kind: string; value: string };
 // Les entrées sont contrôlées ici ; la base de données applique ensuite ses propres règles
 // (seuls les profils validés et les informations autorisées sont retournés ; jamais le nom civil).
 export async function GET(request: NextRequest) {
+  if (!(await rateLimit(request, "search", 100, 300))) return NextResponse.json({ error: "too_many" }, { status: 429 });
   const sp = request.nextUrl.searchParams;
   const q = (sp.get("q") ?? "").trim().slice(0, 80);
   const country = (sp.get("country") ?? "").trim().slice(0, 60) || null;

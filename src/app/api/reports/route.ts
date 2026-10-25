@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { createPublicClient } from "@/lib/supabase/public";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -6,6 +7,7 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // POST /api/reports : enregistre un signalement (jamais publié, examiné par l'équipe).
 export async function POST(request: NextRequest) {
+  if (!(await rateLimit(request, "report", 5, 3600))) return NextResponse.json({ error: "too_many" }, { status: 429 });
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;

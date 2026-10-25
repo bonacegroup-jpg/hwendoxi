@@ -1,5 +1,6 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { findApplicant } from "@/lib/applicant";
 import { buildContacts, parseProfile, profileColumns, text } from "@/lib/profile-input";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -14,6 +15,7 @@ const fail = (error: string, status = 400) => NextResponse.json({ error }, { sta
 // POST /api/referencing/update : corrections d'un dossier en cours, ou demande de modification d'un profil publié.
 // Identification : code de suivi + e-mail déclaré. Rien n'est publié sans examen du comité.
 export async function POST(request: NextRequest) {
+  if (!(await rateLimit(request, "referencing-update", 10, 3600))) return fail("too_many", 429);
   const fd = await request.formData().catch(() => null);
   if (!fd) return fail("invalid_form");
   if (text(fd, "company", 100) !== "") return fail("rejected");
