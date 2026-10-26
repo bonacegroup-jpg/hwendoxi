@@ -6,7 +6,7 @@ import { requireStaff } from "@/lib/admin-auth";
 export const dynamic = "force-dynamic";
 
 type L = Record<string, string> | null;
-type Row = { id: string; kind: "documentation" | "news"; title: L; summary: L; body: L; status: string };
+type Row = { id: string; kind: "documentation" | "news"; title: L; summary: L; body: L; cover_path: string | null; status: string };
 
 export default async function EditArticlePage({ params }: { params: Promise<{ id: string }> }) {
   const staff = await requireStaff(["super_admin", "editor"]);
@@ -23,7 +23,7 @@ export default async function EditArticlePage({ params }: { params: Promise<{ id
         canDelete={staff.role === "super_admin"}
         initial={{
           id: a.id, kind: a.kind, titleFr: a.title?.fr ?? "", titleEn: a.title?.en ?? "",
-          summaryFr: a.summary?.fr ?? "", summaryEn: a.summary?.en ?? "", bodyFr: a.body?.fr ?? "", bodyEn: a.body?.en ?? "", status: a.status,
+          summaryFr: a.summary?.fr ?? "", summaryEn: a.summary?.en ?? "", bodyFr: a.body?.fr ?? "", bodyEn: a.body?.en ?? "", coverPath: a.cover_path, status: a.status,
         }}
       />
     </AdminShell>

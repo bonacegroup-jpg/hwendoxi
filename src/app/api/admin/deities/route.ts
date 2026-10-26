@@ -21,6 +21,8 @@ function parse(body: Record<string, unknown>) {
   const str = (k: string, max: number) => (typeof body[k] === "string" ? (body[k] as string).trim().slice(0, max) : "");
   const name = str("name", 120);
   if (name.length < 2) return null;
+  const imagePath = str("imagePath", 200);
+  if (imagePath && !/^content\/[0-9a-f-]{36}\.(jpg|png|webp)$/.test(imagePath)) return null;
   const status = ["draft", "published", "archived"].includes(str("status", 20)) ? str("status", 20) : "draft";
   const sources = str("sources", 6000)
     .split("\n")
@@ -46,6 +48,7 @@ function parse(body: Record<string, unknown>) {
     description: Object.keys(description).length ? description : null,
     sources,
     status,
+    image_path: imagePath || null,
     traditionId: str("traditionId", 40),
     newTradition: str("newTradition", 120),
   };
@@ -82,7 +85,7 @@ export async function POST(request: NextRequest) {
     .from("deities")
     .insert({
       slug: `${slugify(p.name)}-${suffix()}`, name: p.name, other_names: p.other_names, region: p.region, description: p.description,
-      sources: p.sources, status: p.status, tradition_id: t.id, published_at: p.status === "published" ? new Date().toISOString() : null,
+      sources: p.sources, status: p.status, tradition_id: t.id, image_path: p.image_path, published_at: p.status === "published" ? new Date().toISOString() : null,
     })
     .select("id")
     .single();
@@ -113,7 +116,7 @@ export async function PUT(request: NextRequest) {
     .from("deities")
     .update({
       name: p.name, other_names: p.other_names, region: p.region, description: p.description, sources: p.sources,
-      status: p.status, tradition_id: t.id,
+      status: p.status, tradition_id: t.id, image_path: p.image_path,
       published_at: p.status === "published" ? (current.published_at ?? new Date().toISOString()) : current.published_at,
     })
     .eq("id", id);

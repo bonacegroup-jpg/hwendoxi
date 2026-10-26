@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import Markdown from "@/components/Markdown";
+import { publicMediaUrl } from "@/lib/media";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { Link } from "@/i18n/navigation";
@@ -14,7 +17,7 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 type L = Record<string, string>;
 type Row = {
   slug: string; name: string; other_names: string[] | null; tradition_id: string | null; region: string | null;
-  description: L | null; sources: { title: string; url: string | null }[] | null;
+  description: L | null; sources: { title: string; url: string | null }[] | null; image_path: string | null;
 };
 
 async function getDeity(slug: string) {
@@ -34,7 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const found = await getDeity(slug);
   if (!found) return {};
-  const description = (found.row.description?.[locale] ?? found.row.description?.fr ?? "").slice(0, 155);
+  const description = (found.row.description?.[locale] ?? found.row.description?.fr ?? "").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/[#*>_`\[\]]/g, "").replace(/\s+/g, " ").trim().slice(0, 155);
+  const image = publicMediaUrl(found.row.image_path);
   const path = `/annuaire/divinites/${slug}`;
   return {
     title: found.row.name,
@@ -43,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/${locale}${path}`,
       languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}${path}`])),
     },
-    openGraph: { title: found.row.name, description: description || undefined, type: "article" },
+    openGraph: { title: found.row.name, description: description || undefined, type: "article", images: image ? [image] : undefined },
   };
 }
 
@@ -57,6 +61,7 @@ export default async function DeityPage({ params }: Props) {
   const { row, tradition } = found;
   const description = row.description?.[locale] ?? row.description?.fr ?? "";
   const sources = row.sources ?? [];
+  const image = publicMediaUrl(row.image_path);
 
   return (
     <>
@@ -64,6 +69,9 @@ export default async function DeityPage({ params }: Props) {
       <main className={`${container} max-w-3xl py-10`}>
         <Link href="/annuaire/divinites" className="text-sm text-gold-dark underline">{t("back")}</Link>
         <h1 className="mt-4 font-serif text-3xl font-bold">{row.name}</h1>
+        {image && (
+          <Image src={image} alt={row.name} width={1200} height={675} priority sizes="(min-width: 768px) 768px, 100vw" className="mt-4 h-auto w-full rounded-2xl border border-line object-cover" />
+        )}
 
         <dl className="mt-4 grid gap-x-6 gap-y-2 text-sm md:grid-cols-[180px_1fr]">
           {(row.other_names ?? []).length > 0 && (<><dt className="text-muted">{t("otherNames")}</dt><dd>{(row.other_names ?? []).join(", ")}</dd></>)}
@@ -72,7 +80,7 @@ export default async function DeityPage({ params }: Props) {
         </dl>
 
         <h2 className="mb-2 mt-8 font-serif text-xl font-bold">{t("description")}</h2>
-        <p className="whitespace-pre-line">{description || t("noDescription")}</p>
+        {description ? <Markdown text={description} /> : <p>{t("noDescription")}</p>}
 
         {sources.length > 0 && (
           <>

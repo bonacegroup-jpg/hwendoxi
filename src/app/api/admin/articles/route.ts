@@ -22,6 +22,8 @@ function parse(body: Record<string, unknown>) {
   const titleFr = str("titleFr", 200);
   const kind = str("kind", 20);
   if (titleFr.length < 3 || !["documentation", "news"].includes(kind)) return null;
+  const cover = str("coverPath", 200);
+  if (cover && !/^content\/[0-9a-f-]{36}\.(jpg|png|webp)$/.test(cover)) return null;
   const pair = (fr: string, en: string) => {
     const o: Record<string, string> = {};
     if (fr) o.fr = fr;
@@ -30,6 +32,7 @@ function parse(body: Record<string, unknown>) {
   };
   return {
     kind,
+    cover: cover || null,
     titleFr,
     title: pair(titleFr, str("titleEn", 200)),
     summary: pair(str("summaryFr", 400), str("summaryEn", 400)),
@@ -51,7 +54,7 @@ export async function POST(request: NextRequest) {
   if (!v) return err("invalid_request");
 
   const { data, error } = await staff.supabase.from("articles").insert({
-    slug: `${slugify(v.titleFr)}-${hex()}`, kind: v.kind, title: v.title, summary: v.summary, body: v.body, status: v.status,
+    slug: `${slugify(v.titleFr)}-${hex()}`, kind: v.kind, title: v.title, summary: v.summary, body: v.body, status: v.status, cover_path: v.cover,
     author_id: staff.user.id, published_at: v.status === "published" ? new Date().toISOString() : null,
   }).select("id").single();
   if (error || !data) {
@@ -74,7 +77,7 @@ export async function PUT(request: NextRequest) {
   if (!current) return err("not_found", 404);
 
   const { error } = await staff.supabase.from("articles").update({
-    kind: v.kind, title: v.title, summary: v.summary, body: v.body, status: v.status,
+    kind: v.kind, title: v.title, summary: v.summary, body: v.body, status: v.status, cover_path: v.cover,
     published_at: v.status === "published" ? (current.published_at ?? new Date().toISOString()) : current.published_at,
   }).eq("id", v.id);
   if (error) {

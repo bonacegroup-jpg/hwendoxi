@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import DeityList, { type DeityItem } from "@/components/DeityList";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { publicMediaUrl } from "@/lib/media";
 import { createPublicClient } from "@/lib/supabase/public";
 import { container } from "@/lib/ui";
 
@@ -10,7 +11,7 @@ export const revalidate = 60;
 
 type Props = { params: Promise<{ locale: string }> };
 type L = Record<string, string>;
-type Row = { slug: string; name: string; other_names: string[] | null; tradition_id: string | null; region: string | null; description: L | null };
+type Row = { slug: string; name: string; other_names: string[] | null; tradition_id: string | null; region: string | null; description: L | null; image_path: string | null };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -25,7 +26,7 @@ export default async function DeitiesPage({ params }: Props) {
 
   const supabase = createPublicClient();
   const [deities, traditions] = await Promise.all([
-    supabase.from("deities").select("slug, name, other_names, tradition_id, region, description").order("name").limit(500),
+    supabase.from("deities").select("slug, name, other_names, tradition_id, region, description, image_path").order("name").limit(500),
     supabase.from("traditions").select("id, name"),
   ]);
   if (deities.error) console.error("Divinités :", deities.error.message);
@@ -37,7 +38,8 @@ export default async function DeitiesPage({ params }: Props) {
     otherNames: d.other_names ?? [],
     tradition: d.tradition_id ? (tradName.get(d.tradition_id) ?? "") : "",
     region: d.region,
-    excerpt: (d.description?.[locale] ?? d.description?.fr ?? "").slice(0, 150),
+    excerpt: (d.description?.[locale] ?? d.description?.fr ?? "").replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/[#*>_`\[\]]/g, "").replace(/\s+/g, " ").trim().slice(0, 150),
+    imageUrl: publicMediaUrl(d.image_path),
   }));
   const traditionList = Array.from(new Set(items.map((i) => i.tradition).filter(Boolean))).sort();
 

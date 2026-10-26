@@ -11,7 +11,7 @@ export default async function NewArticlePage({ searchParams }: { searchParams: P
   return (
     <AdminShell staff={staff}>
       <h1 className="mb-4 font-serif text-3xl font-bold">{kind === "news" ? "Nouvelle actualité" : "Nouveau document"}</h1>
-      <ArticleForm canDelete={false} initial={{ kind, titleFr: "", titleEn: "", summaryFr: "", summaryEn: "", bodyFr: "", bodyEn: "", status: "draft" }} />
+      <ArticleForm canDelete={false} initial={{ kind, titleFr: "", titleEn: "", summaryFr: "", summaryEn: "", bodyFr: "", bodyEn: "", coverPath: null, status: "draft" }} />
     </AdminShell>
   );
 }

@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 type Row = {
   id: string; name: string; other_names: string[] | null; region: string | null; tradition_id: string | null;
-  description: Record<string, string> | null; sources: { title: string; url: string | null }[] | null; status: string;
+  description: Record<string, string> | null; sources: { title: string; url: string | null }[] | null; status: string; image_path: string | null;
 };
 
 export default async function EditDeityPage({ params }: { params: Promise<{ id: string }> }) {
@@ -39,6 +39,7 @@ export default async function EditDeityPage({ params }: { params: Promise<{ id: 
           descEn: d.description?.en ?? "",
           sources: (d.sources ?? []).map((s) => (s.url ? `${s.title} | ${s.url}` : s.title)).join("\n"),
           status: d.status,
+          imagePath: d.image_path,
         }}
       />
     </AdminShell>

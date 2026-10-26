@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Link } from "@/i18n/navigation";
 
-export type DeityItem = { slug: string; name: string; otherNames: string[]; tradition: string; region: string | null; excerpt: string };
+export type DeityItem = { slug: string; name: string; otherNames: string[]; tradition: string; region: string | null; excerpt: string; imageUrl: string | null };
 
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
 const normalize = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
@@ -44,12 +45,15 @@ export default function DeityList({ items, traditions }: { items: DeityItem[]; t
       ) : (
         <div className="grid gap-4 md:grid-cols-3">
           {results.map((d) => (
-            <article key={d.slug} className="rounded-2xl border border-line bg-white p-5">
+            <article key={d.slug} className="overflow-hidden rounded-2xl border border-line bg-white">
+              {d.imageUrl && <Image src={d.imageUrl} alt="" width={640} height={360} className="h-44 w-full object-cover" />}
+              <div className="p-5">
               <h2 className="font-serif text-lg font-bold leading-tight">{d.name}</h2>
               {d.otherNames.length > 0 && <p className="text-sm text-muted">{d.otherNames.join(", ")}</p>}
               <p className="mt-2 text-sm font-semibold">{d.tradition}{d.region ? ` · ${d.region}` : ""}</p>
               {d.excerpt && <p className="mt-2 text-sm text-muted">{d.excerpt}</p>}
               <Link href={`/annuaire/divinites/${d.slug}`} className="mt-3 inline-block font-semibold text-gold-dark underline">{t("view")}</Link>
+              </div>
             </article>
           ))}
         </div>

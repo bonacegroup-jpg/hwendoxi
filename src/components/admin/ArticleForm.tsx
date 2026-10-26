@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { btnGhost, btnPrimary } from "@/lib/ui";
+import CoverImageField from "./CoverImageField";
+import RichEditor from "./RichEditor";
 
 export type ArticleValues = {
   id?: string;
@@ -10,6 +12,7 @@ export type ArticleValues = {
   titleFr: string; titleEn: string;
   summaryFr: string; summaryEn: string;
   bodyFr: string; bodyEn: string;
+  coverPath: string | null;
   status: string;
 };
 
@@ -59,8 +62,8 @@ export default function ArticleForm({ initial, canDelete }: { initial: ArticleVa
     <form onSubmit={save} className="max-w-3xl rounded-2xl border border-line bg-white p-6">
       <label htmlFor="kind" className={lab}>Type de contenu</label>
       <select id="kind" className={field} value={v.kind} onChange={set("kind")}>
-        <option value="documentation">Documentation</option>
         <option value="news">Actualité</option>
+        <option value="documentation">Documentation</option>
       </select>
 
       <label htmlFor="titleFr" className={lab}>Titre (français)</label>
@@ -68,19 +71,18 @@ export default function ArticleForm({ initial, canDelete }: { initial: ArticleVa
       <label htmlFor="titleEn" className={lab}>Titre (anglais, facultatif)</label>
       <input id="titleEn" maxLength={200} className={field} value={v.titleEn} onChange={set("titleEn")} />
 
+      <CoverImageField label="Image principale" value={v.coverPath} onChange={(coverPath) => setV((s) => ({ ...s, coverPath }))} />
+
       <label htmlFor="summaryFr" className={lab}>Résumé (français, 400 caractères maximum)</label>
       <textarea id="summaryFr" rows={2} maxLength={400} className={field} value={v.summaryFr} onChange={set("summaryFr")} />
       <label htmlFor="summaryEn" className={lab}>Résumé (anglais, facultatif)</label>
       <textarea id="summaryEn" rows={2} maxLength={400} className={field} value={v.summaryEn} onChange={set("summaryEn")} />
 
-      <label htmlFor="bodyFr" className={lab}>Texte (français)</label>
-      <textarea id="bodyFr" rows={14} maxLength={30000} className={field} value={v.bodyFr} onChange={set("bodyFr")} />
-      <label htmlFor="bodyEn" className={lab}>Texte (anglais, facultatif)</label>
-      <textarea id="bodyEn" rows={8} maxLength={30000} className={field} value={v.bodyEn} onChange={set("bodyEn")} />
-      <p className="mt-1 text-xs text-muted">Les sauts de ligne sont conservés. Ne publiez que des contenus dont la diffusion est autorisée.</p>
+      <RichEditor label="Texte (français)" value={v.bodyFr} onChange={(bodyFr) => setV((s) => ({ ...s, bodyFr }))} rows={16} />
+      <RichEditor label="Texte (anglais, facultatif)" value={v.bodyEn} onChange={(bodyEn) => setV((s) => ({ ...s, bodyEn }))} rows={10} />
 
       <p className="mt-4 rounded-xl bg-sand p-3 text-sm">
-        Contenus de pharmacopée : présentez-les à titre documentaire, sans allégation médicale non vérifiée ni recommandation dangereuse. Les savoirs confidentiels ne doivent pas être exposés.
+        Contenus de pharmacopée : présentez-les à titre documentaire, sans allégation médicale non vérifiée ni recommandation dangereuse. Les savoirs confidentiels ne doivent pas être exposés. Publiez uniquement des images dont vous détenez les droits.
       </p>
 
       <label htmlFor="status" className={lab}>Statut</label>

@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { btnGhost, btnPrimary } from "@/lib/ui";
+import CoverImageField from "./CoverImageField";
+import RichEditor from "./RichEditor";
 
 export type DeityValues = {
   id?: string;
@@ -13,12 +15,13 @@ export type DeityValues = {
   descFr: string;
   descEn: string;
   sources: string;
+  imagePath: string | null;
   status: string;
 };
 
 const field = "w-full rounded-xl border border-line bg-white px-4 py-3 text-base";
 const lab = "mb-1 mt-4 block text-sm font-semibold";
-const EMPTY: DeityValues = { name: "", otherNames: "", region: "", traditionId: "", descFr: "", descEn: "", sources: "", status: "draft" };
+const EMPTY: DeityValues = { name: "", otherNames: "", region: "", traditionId: "", descFr: "", descEn: "", sources: "", imagePath: null, status: "draft" };
 
 export default function DeityForm({
   initial,
@@ -84,6 +87,8 @@ export default function DeityForm({
       <label htmlFor="otherNames" className={lab}>Autres appellations (séparées par des virgules)</label>
       <input id="otherNames" maxLength={800} className={field} value={v.otherNames} onChange={set("otherNames")} />
 
+      <CoverImageField label="Image principale" value={v.imagePath} onChange={(imagePath) => setV((s) => ({ ...s, imagePath }))} />
+
       <label htmlFor="traditionId" className={lab}>Tradition ou aire culturelle</label>
       <select id="traditionId" className={field} value={v.traditionId} onChange={set("traditionId")}>
         <option value="">— Aucune —</option>
@@ -95,10 +100,8 @@ export default function DeityForm({
       <label htmlFor="region" className={lab}>Région ou pays d’origine (si documenté)</label>
       <input id="region" maxLength={120} className={field} value={v.region} onChange={set("region")} />
 
-      <label htmlFor="descFr" className={lab}>Description documentée (français)</label>
-      <textarea id="descFr" rows={7} maxLength={5000} className={field} value={v.descFr} onChange={set("descFr")} />
-      <label htmlFor="descEn" className={lab}>Description (anglais, facultatif)</label>
-      <textarea id="descEn" rows={5} maxLength={5000} className={field} value={v.descEn} onChange={set("descEn")} />
+      <RichEditor label="Description documentée (français)" value={v.descFr} onChange={(descFr) => setV((s) => ({ ...s, descFr }))} rows={14} />
+      <RichEditor label="Description (anglais, facultatif)" value={v.descEn} onChange={(descEn) => setV((s) => ({ ...s, descEn }))} rows={9} />
 
       <label htmlFor="sources" className={lab}>Sources documentaires (une par ligne : « Titre | https://adresse », l’adresse est facultative)</label>
       <textarea id="sources" rows={4} maxLength={6000} className={field} value={v.sources} onChange={set("sources")} />
@@ -116,7 +119,7 @@ export default function DeityForm({
         <button type="button" className={btnGhost} onClick={() => router.push("/admin/divinites")}>Annuler</button>
         {v.id && canDelete && <button type="button" className={btnGhost} disabled={busy} onClick={remove}>Supprimer</button>}
       </div>
-      <p className="mt-3 text-xs text-muted">Ne publiez que des informations dont la diffusion est autorisée. Les savoirs confidentiels ne doivent pas être exposés.</p>
+      <p className="mt-3 text-xs text-muted">Ne publiez que des informations et des images dont la diffusion est autorisée. Les savoirs confidentiels ne doivent pas être exposés.</p>
     </form>
   );
 }
